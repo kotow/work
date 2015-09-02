@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rights>
+
+	<user label="admin">
+
+		<module name="tag">
+			<objects>
+				<object commands="createFolder,createTag">Rootfolder</object>
+				<object commands="createFolder,createTag">Folder</object>
+				<object commands="">Tag</object>
+			</objects>
+		</module>
+
+		<module name="lists">
+			<objects>
+				<object commands="createLists">Rootfolder</object>
+				<object commands="createListitem">Lists</object>
+				<object commands="createListitemI18n">Listitem</object>
+			</objects>
+		</module>
+
+		<module name="user">
+			<objects>
+				<object commands="createFolder,createUser">Rootfolder</object>
+				<object commands="createFolder,createUser">Folder</object>
+				<object commands="">User</object>
+			</objects>
+		</module>
+
+		<module name="media">
+			<objects>
+				<object commands="createFolder,createMedia">Rootfolder</object>
+				<object commands="createFolder,createMedia">Folder</object>
+				<object commands="">Media</object>
+			</objects>
+		</module>
+
+		<module name="news">
+			<objects>
+				<object commands="createFolder,createNews">Rootfolder</object>
+				<object commands="createFolder,createNews">Folder</object>
+				<object commands="createNewsI18n">News</object>
+				<object commands="">NewsI18n</object>
+			</objects>
+		</module>
+		
+		<module name="products">
+			<objects>
+				<object commands="createCategory">Rootfolder</object>
+				<object commands="createProduct,createCategoryI18n">Category</object>
+				<object commands="createProductI18n">Product</object>
+				<object commands="">ProductI18n</object>
+			</objects>
+		</module>
+
+		<module name="services">
+			<objects>
+				<object commands="createServiceCategory">Rootfolder</object>
+				<object commands="createService">ServiceCategory</object>
+				<object commands="">Service</object>
+			</objects>
+		</module>
+		
+		<module name="newsletter">
+			<objects>
+				<object commands="createNewsletter,createFolder">Rootfolder</object>
+				<object commands="createMailinglist">Folder</object>
+				<object commands="createSubscriber">Mailinglist</object>
+				<object commands="">Newsletter</object>
+			</objects>
+		</module>
+
+		<module name="keywords">
+			<objects>
+				<object commands="createFolder,createKeyword">Rootfolder</object>
+				<object commands="createFolder,createKeyword">Folder</object>
+				<object commands="">Keyword</object>
+			</objects>
+		</module>
+		
+		<module name="website">
+			<objects>
+				<object commands="createWebsite">Rootfolder</object>
+				<object commands="createMenu,createTopic,createPage">Website</object>
+				<object commands="createTopic,createPage">Menu</object>
+				<object commands="createTopicI18n,createTopic,createPage">Topic</object>
+				<object commands="createPageI18n">Page</object>
+				<object commands="">PageI18n</object>
+			</objects>
+		</module>
+
+	</user>
+
+	<user label="site_admin">
+	
+		<!--
+		<module name="tag">
+			<objects>
+				<object commands="createFolder,createTag">Rootfolder</object>
+				<object commands="createFolder,createTag">Folder</object>
+				<object commands="">Tag</object>
+			</objects>
+		</module>
+		-->
+
+		<module name="lists">
+			<objects>
+				<object commands="createLists">Rootfolder</object>
+				<object commands="createListitem">Lists</object>
+				<object commands="createListitemI18n">Listitem</object>
+			</objects>
+		</module>
+
+		<module name="user">
+			<objects>
+				<object commands="createFolder,createUser">Rootfolder</object>
+				<object commands="createFolder,createUser">Folder</object>
+				<object commands="">User</object>
+			</objects>
+		</module>
+
+		<module name="media">
+			<objects>
+				<object commands="createFolder,createMedia">Rootfolder</object>
+				<object commands="createFolder,createMedia">Folder</object>
+				<object commands="">Media</object>
+			</objects>
+		</module>
+
+		<module name="news">
+			<objects>
+				<object commands="createFolder,createNews">Rootfolder</object>
+				<object commands="createFolder,createNews">Folder</object>
+				<object commands="createNewsI18n">News</object>
+				<object commands="">NewsI18n</object>
+			</objects>
+		</module>
+		
+		<module name="products">
+			<objects>
+				<object commands="createCategory">Rootfolder</object>
+				<object commands="createProduct,createCategoryI18n">Category</object>
+				<object commands="createProductI18n">Product</object>
+				<object commands="">ProductI18n</object>
+			</objects>
+		</module>
+
+		<module name="newsletter">
+			<objects>
+				<object commands="createNewsletter,createFolder">Rootfolder</object>
+				<object commands="createMailinglist">Folder</object>
+				<object commands="createSubscriber">Mailinglist</object>
+				<object commands="">Newsletter</object>
+			</objects>
+		</module>
+
+		<module name="keywords">
+			<objects>
+				<object commands="createFolder,createKeyword">Rootfolder</object>
+				<object commands="createFolder,createKeyword">Folder</object>
+				<object commands="">Keyword</object>
+			</objects>
+		</module>
+		
+		<module name="website">
+			<objects>
+				<object commands="createWebsite">Rootfolder</object>
+				<object commands="createMenu,createTopic,createPage">Website</object>
+				<object commands="createTopic,createPage">Menu</object>
+				<object commands="createTopicI18n,createTopic,createPage">Topic</object>
+				<object commands="createPageI18n">Page</object>
+				<object commands="">PageI18n</object>
+			</objects>
+		</module>
+		
+	</user>
+ 
+</rights>

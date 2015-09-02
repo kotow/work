@@ -1,0 +1,24 @@
+methods:
+  post: [login, password]
+
+names:
+  login:
+    required:      true
+    required_msg:  your login is required
+    validators:    [loginValidator, userValidator]
+
+  password:
+    required:     true
+    required_msg: your password is required
+
+loginValidator:
+    class:        sfStringValidator
+    param:
+      min:        5
+      min_error:  login must be 5 or more characters
+      
+userValidator:
+    class:         myLoginValidator
+    param:
+      password:    password
+      login_error: this account does not exist or you entered a wrong password

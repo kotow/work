@@ -1,0 +1,1250 @@
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html,
+body {
+   margin:0;
+   padding:0;
+   font-family: 'Exo 2', sans-serif !important;
+   font-size: 13px;
+   line-height: 170%;
+   color: #5a5a5a;
+}
+a:hover {
+    color: #418382;
+}
+.qfHeaderWrap {
+    width: 100%;
+    height: 104px;
+    background: transparent url(../images/header-bgr.png) left top no-repeat;
+}
+.qfHeaderNav {
+    position: relative;
+    color: #333;
+}
+.qfLogoWrap {}
+.qfLogoWrap img {
+    margin: 12px 0 0 37px;
+}
+.qfUserNav {
+    position: absolute;
+    top: 27px;
+    right: 41px;
+    display: table;
+}
+.qfUsetCol {
+    display: table-cell;
+    width: 50%;
+    vertical-align: middle;
+    text-align: center;
+}
+.qfUsetCol.qfUser {
+    text-align: center;
+    background: transparent url(../images/user-icon.png) center top no-repeat;
+    padding: 40px 0 0 0;
+    font-weight: 700;
+    font-size: 11px;
+}
+a.qfLogOut {
+    background: #af040d url(../images/logout-icon.png) 10px center no-repeat;
+    color: #fff;
+    margin: 0 0 0 5px;
+    padding: 10px 15px 10px 30px;
+    text-decoration: none;
+}
+a.qfLogOut:hover {
+    text-decoration: underline;
+}
+.qfContainer {
+    /*max-width: 1000px;*/
+    width: 100%;
+    overflow: hidden;
+}
+.qfContainerBlock {
+
+}
+
+.qfMainNav {
+    float: left;
+    width: 140px;
+    background: #418382;
+    color: #fff;
+}
+
+ul.qfMainNavList {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+ul.qfMainNavList li {
+
+}
+
+ul.qfMainNavList li a {
+    display: block;
+    text-align: center;
+    padding: 10px 12px 5px;
+    height: 115px;
+    border-top: 1px solid #74b4b4;
+    border-bottom: 1px solid #195756;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    line-height: 150%;
+}
+
+ul.qfMainNavList li a img {
+	width: 50%;
+} 
+
+ul.qfMainNavList li a span {
+	font-size: 12px;
+} 
+
+ul.qfMainNavList li a:hover {
+    background: #e6ad16;
+    text-decoration: underline;
+}
+ul.qfMainNavList li.qfMNavListActive a {
+    background: #e6ad16;
+}
+ul.qfMainNavList li a span {
+    display: block;
+}
+.qfMainBody {
+    overflow: hidden;
+    padding: 0;
+    background: #f2f2f2 url(../images/shadow.png) left top repeat-x;
+}
+.qfEntryHeader {
+    background: #c6c6c6;
+    color: #fff;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1.2em;
+    padding: 0 0 0 20px;
+    margin: 12px 0 0 0;
+}
+.qfEntryContent {
+    /*max-width: 900px;*/
+    min-width: 550px;
+    margin: 24px 13px 20px 13px;
+    position: relative;
+}
+.qfTrTrMarks {
+    display: table;
+    width: 100%;
+}
+.qfTrTrCol {
+    display: table-cell;
+    width: 48%;
+    margin: 0 1%;
+    vertical-align: top;
+}
+.qfTrTrColFull {
+    width: 100%;
+}
+.qfTrTrCol01 {
+    padding: 0 10px 0 0;
+}
+.qfTrMarkItem {
+    width: 360px;
+    height: 98px;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #d1d3d4;
+    margin: 0 5px 0 0;
+    position: relative;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.qfTrMarkItem:hover {
+    -moz-box-shadow:    0px 0px 1px 2px rgba(204,204,204,0.5);
+    -webkit-box-shadow: 0px 0px 1px 2px rgba(204,204,204,0.5);
+    box-shadow:         0px 0px 1px 2px rgba(204,204,204,0.5);
+}
+.qfTrMarkItemDelete,
+.qfSearchListitemDelete {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    display: none;
+    width: 20px;
+    height: 20px;
+    background: #ccc;
+    text-align: center;
+    line-height: 18px;
+    font-size: 11px;
+    color: #fff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.qfTrMarkItem:hover .qfTrMarkItemDelete {
+    display: inline-block;
+}
+.qfTrMarkItemDelete:hover,
+.qfSearchListitemDelete:hover {
+    background: #AF040D;
+}
+.qfTrMarkPiece {
+    display: table-cell;
+    height: 98px;
+    vertical-align: middle;
+}
+.qfTrMarkPiece.qfTrMarkPLogo {
+    width: 30%;
+}
+.qfTrMarkPiece.qfTrMarkPHeading {
+    width: 65%;
+    text-align: center;
+    padding: 0 4% 0 0%;
+    font-weight: bold;
+    font-size: 1.4em;
+}
+.qfTrMarkPiece.qfTrMarkPHeading a {
+    color: #5a5a5a;
+    text-decoration: none;
+}
+.qfTrMarkPiece.qfTrMarkPHeading a:hover {
+    text-decoration: underline;
+}
+.qfTrMarkPiece.qfTrMarkPLogo img {
+	box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
+    max-width: 95%;
+    max-height: 90px;
+}
+.qfTrMarkContainer {
+    width: 100%;
+    border: 0px solid #d0d0d0;
+    background: #fff;
+    padding: 3px;
+    margin: 0 0 0 0;
+    display: table;
+    color: #5a5a5a;
+    font-size: 1.8em;
+}
+.qfTrMarkCell {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+	height: 47px;
+}
+.qfTrMarkLogo {
+    width: 30%;
+    border-right: 1px solid #d0d0d0;
+}
+.qfSearchWrap .qfTrMarkContainer .qfTrMarkLogo img {
+    max-width: 65%;
+	max-height:45px;
+}
+.qfTrMarkHeading {
+    width: 70%;
+    font-weight: 700;
+    line-height: 140%;
+    padding-left: 10px;
+    padding-right: 30px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;
+}
+.qfBoxContainer {
+    background: #fff;
+    border: 1px solid #d0d0d0;
+    padding: 20px;
+    max-width: 1000px;
+}
+.qfBoxContainer h2 {
+    margin: 7px 0;
+}
+.qfTwoColsBox {
+    display: table;
+    width: 100%;
+}
+.qfTwoCol {
+    display: table-cell;
+    width: 50%;
+    vertical-align: top;
+}
+.qfTwoCol01 {
+    padding: 0 10px 0 0;
+    border-right: 1px solid #f2f2f2;
+}
+.qfTwoCol02 {
+    padding: 0 0 0 10px;
+}
+h3.qfFmPieceHeading {
+    border-left: 4px solid #ffbd16;
+    padding: 0 0 0 10px;
+    margin-bottom: 25px;
+}
+input,
+textarea
+{
+    background: #fff;
+    border: 1px solid #d1d3d2;
+    padding: 10px 7px;
+}
+
+
+select
+{
+    background: #fff;
+    border: 1px solid #d1d3d2;
+    padding: 9px 7px;
+    margin: 0 0 20px;
+}
+
+input[type=text],
+input[type=password],
+textarea{
+    width: 100%;
+    margin: 0 0 10px 0;
+}
+textarea {
+    min-height: 30px;
+}
+input[type=submit]{
+    background: #ffbd17;
+    border: 0;
+    color: #6e6e6e;
+    padding: 10px 25px;
+    font-weight: 700;
+    cursor: pointer;
+}
+input.qfSubmitBtn:focus,
+input.qfSubmitBtn:hover {
+    background: #333;
+    color: #fff;
+}
+.qfTwoColsBox label {
+    padding: 0 0 5px 0;
+    display: inline-block;
+}
+.qfTwoColsBox input {
+    width: 100%;
+    margin: 0 0 20px 0;
+}
+.qfFmCtrls {
+    text-align: center;
+}
+.qfAddCtrls {
+    text-align: right;
+}
+.qfAddCtrls .hideFmPart {
+    display: inline-block;
+    font-weight: 700;
+    padding: 0 22px 0 0;
+    background: transparent url(../images/tog-arrows-up.png) 100% 50% no-repeat;
+    cursor: pointer;
+}
+.qfAddCtrls .hideFmPart.qfFmSelected {
+    background: transparent url(../images/tog-arrows-down.png) 100% 50% no-repeat;
+}
+.qfTogFmPiece {
+    /*display: none;*/
+}
+.loginContainer {
+    background: #fff;
+    -webkit-box-shadow: 3px 3px 4px 0px rgba(50, 50, 50, 0.6);
+    -moz-box-shadow: 3px 3px 4px 0px rgba(50, 50, 50, 0.6);
+    box-shadow: 3px 3px 4px 0px rgba(50, 50, 50, 0.6);
+    padding: 40px;
+    max-width: 420px;
+    margin: 50px 0;
+    position: relative;
+    left: 25%;
+    top: 10%;
+}
+.qfFmMinHeading {
+    text-align: center;
+}
+.qfFmMinHeading h2 {
+    margin: 0 0 30px 0;
+}
+.qfOneColFmRd {
+    display: table;
+    margin: 20px 0;
+}
+.qfOneColFmRd div {
+    display: table-cell;
+    vertical-align: top;
+    padding: 10px;
+}
+.qfOneColFmRd div.qfOneColFmRdHeading {
+    width: 60px;
+    min-width: 60px;
+    vertical-align: middle;
+}
+.qfOneColFmRdHeading h3 {
+    margin: 0;
+}
+.qfOneColFmRdBtn {}
+.qfOneColFmRdBtnCell {
+    border: 1px solid #d1d3d4;
+    padding: 10px;
+    margin: 0 10px 0 0;
+    min-width: 130px;
+    font-weight: bold;
+}
+.qfOneColFmRdBtnCell input {
+    position: relative;
+    /*top: 2px;*/
+	margin-right:10px;
+}
+input.qfDatePick {
+    background: #fff url(../images/calendar.png) 100% 50% no-repeat;
+}
+.qfAddLogoContainer {
+    text-align: center;
+}
+.qfTwoColsBox .qfFmCtrls input {
+    width: auto;
+}
+.qfMaxWd {
+    max-width: 1000px;
+}
+.qfSessCell {
+    background: #fff;
+    border: 1px solid #d3d5d6;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.qfRedBorderCell {
+    border: 2px solid #be1e2d;
+}
+.qfSessHeading {
+    text-align: center;
+    padding: 5px;
+}
+.qfSess21ColWrap {
+    width: 100%;
+    margin: 10px 0 0 0;
+    overflow: hidden;
+}
+.qfSess2ColWrap {
+    float: left;
+    width: 65.33333333333%;
+    margin: 0 1% 0 0;
+}
+.qfSess1ColWrap {
+    float: right;
+    width: 33.333333333333%;
+}
+.qfSess11ColWrap {
+    overflow: hidden;
+    width: 100%;
+}
+.qfSess50ColWrap {
+    width: 49%;
+    float: left;
+    margin: 0 1% 0 0;
+    min-height: 320px;
+}
+.qfSess50ColWrap.qfSess50ColWrapAdd {
+    width: 49%;
+    margin: 0 0 0 1%;
+}
+.qfSessBlockHeading {
+    border-bottom: 1px solid #d4d6d7;
+    padding: 10px;
+}
+.qfSessCellRevStyle .qfSessBlockHeading {
+	color: #fff;
+	background: #418382;
+}
+.qfSessBlockCnt {
+    padding: 10px;
+}
+.qfSessBlockCnt p {
+    margin: 0 0 10px;
+}
+.qfSessBlockHeading h3 {
+    color: #418382;
+    margin: 0;
+}
+.qfSessCellRevStyle .qfSessBlockHeading h3 {
+	color: #fff;
+}
+.qfSessFullSubColWrap {
+    margin: 10px 0 0 0;
+}
+.qfSessClasTable {
+    display: table;
+}
+.qfSessClasCell {
+    display: table-cell;
+}
+.qfSessClasTable .qfSessClasCell {
+    display: inline-block;
+}
+.qfSessClasTable .qfSessClasCell.qfSessClasTxt {
+    max-width: 85%;
+    height: 45px;
+    overflow: hidden;
+    padding-top: 0;
+    margin-bottom: 10px;
+}
+.qfSessClasNum {
+    max-width: 70px;
+    vertical-align: middle;
+    text-align: left;
+}
+.qfSessClasNum span {
+    text-align: center;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    color: #ffaa00;
+    background: #fff;
+    border: 1px solid #d1d3d4;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.qfSessClasTxt {
+    vertical-align: top;
+    padding: 7px 0 7px 15px;
+}
+.qfSessLogoContainer {
+    text-align: center;
+    border-bottom: 1px solid #e7e8e9;
+	min-height: 68px;
+}
+#qfLogo_info {
+	min-height: 283px;
+}
+
+.qfSessColorsContainer {
+    text-align: center;
+    margin: 5px 0;
+}
+.qfSessBlockCnt h4 {
+    margin: 0 0 5px 0;
+}
+.qfSessCellMArTop {
+    margin: 10px 0 0 0;
+}
+.qfSessMainCtrls {
+    text-align: right;
+    margin: 20px 0;
+}
+a.qfSessCtrlBtn {
+    padding: 8px 8px 8px 35px;
+    margin: 0 0 0 10px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+.qfEntryContent a.qfSessCtrlBtn {
+	margin: 0;
+}
+.qfTrMarkItemAddDel.qfTrMarkItemAddDelTop {
+	margin: 20px 0;
+}
+.qfTrMarkItemAddDelTop a.qfSessCtrlBtn {
+	margin:0;
+}
+a.qfSessCtrlBtn.qfSessCtrlLgt {
+    background: #ffbd17 url(../images/sq-dark.png) 5% 50% no-repeat;
+}
+a.qfSessCtrlBtn.qfSessCtrlDark {
+    background: #af040d url(../images/sq-trash.png) 5% 50% no-repeat;
+}
+a.qfSessCtrlBtn.qfSessCtrlPlus {
+    background: #ffbd17 url(../images/sq-plus.png) 5% 50% no-repeat;
+}
+a.qfSessCtrlBtn.qfSessCtrlTrash {
+    background: #af040d url(../images/sq-trash.png) 5% 50% no-repeat;
+}
+.qfSearchTag {
+    max-width: 430px;
+	min-width: 400px;
+    display: inline-block;
+    position: relative;
+    z-index: 99;
+    font-size: 0.8em;
+    cursor: pointer;
+	border: 1px solid #D0D0D0;
+}
+.qfEntryContentSearch .qfSearchTag {
+	border:0;
+}
+.qfEntryContentUpTr .qfSearchTag {
+	border: 1px solid #D0D0D0;
+}
+.qfEntryContentUpTr .qfUpProgressWrap {
+	margin: 0 0 20px 0;
+}
+.qfImpReport .qfSearchTag {
+
+}
+.qfSearchWrap {
+    text-align: center;
+	margin: 0 0 20px 0;
+}
+.qfBoxBorderBg {
+    background: #fff;
+    border: 1px solid #d0d0d0;
+}
+.qfSearchListWrap {
+    padding: 50px 30px 5px 30px;
+    position: relative;
+    bottom: 30px;
+    z-index: 9;
+}
+.qfEntryContentSearch .qfSearchListWrap {
+	padding: 5px 30px 0px 30px;
+}
+.qfSearchListWrapExpand {
+    display: none;
+}
+.qfUpListWrap,
+.qfUpProgressWrap,
+.qfUpErrorWrap {
+    padding: 75px 30px 5px 30px;
+    position: relative;
+    bottom: 30px;
+    z-index: 9;
+}
+.qfUpErrorWrap {
+    text-align: center;
+}
+.qfImpReport .qfSearchListWrap,
+.qfUpHolder .qfUpListWrap,
+.qfSearchRes .qfSearchListWrap,
+.qfUpHolder .qfUpProgressWrap,
+.qfUpHolder .qfUpErrorWrap {
+    padding-bottom: 30px;
+}
+.qfSearchListitem {
+    text-align: left;
+    background: #f1f2f2;
+    border: 1px solid #d1d3d4;
+    width: 100%;
+    display: table;
+    margin: 0 0 4px 0;
+    position: relative;
+}
+.qfSearchListitem .qfSearchListitemDelete {
+    display: none;
+}
+.qfSearchListitem:hover .qfSearchListitemDelete {
+    display: inline-block;
+}
+.wrapUpItem {
+    margin: 0 0 4px 0;
+}
+.qfUpListitem {
+    text-align: left;
+    border: 1px solid #d1d3d4;
+    width: 100%;
+    display: table;
+    margin: 0;
+    background: #fff;
+    height: 60px;
+    position: relative;
+    cursor: pointer;
+}
+.qfUpListitem.qfUpListItemSelected {
+    background: #F1F2F2;
+    border-bottom: 0;
+}
+.qfUpChange {
+    display: inline-block;
+    float: right;
+    padding: 0 15px 0 0;
+    text-align: right;
+}
+.qfUpRightListItemSelected .qfUpChange {
+	padding: 0 75px 0 0;
+}
+.qfUpImgIcon {
+    /*display: inline-block;*/
+	display: none;
+    width: 10px;
+    height: 62px;
+    background: transparent url(../images/up-icon.png) center center no-repeat;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.qfUpRightListItemSelected .qfUpImgIcon {
+	display:inline-block;
+	width: 60px;
+}
+.wrapUpItem:first-of-type .qfUpImgIcon {
+	background: transparent url(../images/up-icon-bpo.png) center center no-repeat;
+}
+
+.qfUpListitem.qfUpListItemSelected .qfUpImgIcon {
+    background-color: #ffbd17;
+}
+.qfSearchItemCell {
+    display: table-cell;
+    width: 50%;
+    vertical-align: middle;
+}
+.qfUpItemCell {
+    display: table-cell;
+    width: 50%;
+    vertical-align: middle;
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.qfSearchLeft {
+    background: #fff;
+    border-right: 1px solid #d1d3d4;
+    /*width: 60%;*/
+}
+.qfUpLeft {
+    border-right: 1px solid #d1d3d4;
+    width: 70%;
+}
+.qfSearchRight {
+    padding: 0 20px;
+    width: 30%;
+    position: relative;
+}
+.qfUpListitem .qfSearchRight {
+    padding: 0 70px 0 0;
+}
+.qfUpListitem .qfSearchLeft {
+    border: 0;
+}
+.qfUpListitem .qfUpLeft {
+    border: 0;
+}
+.qfUpListitem .qfSearchRight {
+    text-align: right;
+}
+.qfSearchItemLData {
+    width: 100%;
+}
+.qfUpItemLData {
+    width: 100%;
+}
+.qfSearchItemLData span {
+    display: inline-block;
+    padding: 20px 0;
+}
+.qfUpItemLData span {
+    display: inline-block;
+    padding: 20px 0;
+}
+.qfSearchItemLData .qfSearchItemNum {
+    color: #fff;
+    background: #ffbd17;
+    text-align: center;
+    width: 50px;
+}
+.qfUpItemLData .qfUpItemNum {
+    color: #fff;
+    background: #ffbd17;
+    text-align: center;
+    width: 50px;
+}
+.qfSearchItemLData .qfSearchItemName {
+    font-weight: bold;
+    padding-left: 20px;
+    font-size: 1.3em;
+    line-height: 100%;
+}
+.qfSearchItemName a {
+	color: #418382;
+}
+.qfSearchItemName a:hover {
+	text-decoration: none;
+}
+.qfUpItemLData .qfUpItemName {
+    font-weight: bold;
+    padding-left: 20px;
+    font-size: 1.3em;
+    line-height: 100%;
+}
+.qfSearchItemLData .qfSearchItemDate {
+    font-weight: bold;
+    float: right;
+    padding-right: 10px;
+}
+.qfUpItemLData .qfUpItemDate {
+    font-weight: bold;
+    float: right;
+    padding-right: 10px;
+}
+.qfSearchRight p {
+    margin: 0;
+    line-height: 120%;
+    font-size: 0.9em;
+}
+.qfUpRight p {
+    margin: 0;
+    line-height: 120%;
+    font-size: 0.9em;
+}
+.qfSearchRight p span {
+    font-weight: bold;
+    display: inline-block;
+    min-width: 145px;
+}
+.qfUpRight p span {
+    font-weight: bold;
+    display: inline-block;
+    min-width: 145px;
+}
+.qfSearcjCtrls .qfSessMainCtrls {
+    margin: 0;
+    position: relative;
+    top: 10px;
+}
+.qfMidHeadingBgr {
+    padding: 15px 10px 15px 55px;
+    background: transparent url(../images/note-icon.png) 5% 50% no-repeat;
+}
+.qfUpHeadingBgr {
+    padding: 15px 10px 15px 55px;
+    background: transparent url(../images/upload-icon.png) 5% 50% no-repeat;
+}
+table.qfTabInpSess {
+    width: 100%;
+    margin: 0 0 30px 0;
+}
+table.qfTabInpSess th {
+    font-weight: normal;
+}
+table.qfTabInpSess td {
+    padding: 8px 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+	cursor:pointer;
+}
+table.qfTabInpSess td:first-child {
+    width: 20%;
+}
+table.qfTabInpSess tr:hover td {
+    background: #ffbd17;
+    color: #fff;
+}
+table.qfTabInpSess tr:nth-child(even) {background: #f1f2f2;}
+table.qfTabInpSess tr:nth-child(odd) {background: #fff;}
+.qfRepImpSsItem {
+    display: table;
+    width: 100%;
+    text-align: left;
+    margin: 0 0 5px 0;
+}
+.qfRepImpSsCol {
+    display: table-cell;
+    width: 50%;
+    height: 50px;
+    line-height: 50%;
+    vertical-align: middle;
+}
+.qfRepImpSsItemColTitle {
+    margin: 0 0 20px 0;
+}
+.qfRepImpSsItemColTitle .qfRepImpSsCol {
+    text-align: center;
+    height: 30px;
+    font-size: 1.1em;
+}
+.qfRepImpSsItemColTitle .qfRepImpSsColFr {
+    border-right: 1px solid #ccc;
+}
+.qfRepImpSsCol.qfRepImpSsLeft {
+    background: #a7a9ac;
+}
+.qfRepImpSsCol.qfRepImpSsRight {
+    padding: 0 0 0 20px;
+    background: #f1f2f2 url(../images/rep-marker.png) left center no-repeat;
+}
+.qfRepImpSsColInn {
+    display: table;
+    width: 100%;
+}
+.qfRepImpSsColInn div {
+    display: table-cell;
+    vertical-align: middle;
+}
+.qfRepImpSsColInnImg {
+    width: 20%;
+    text-align: center;
+}
+.qfRepImpSsColInnImg img {
+    max-height: 50px;
+}
+.qfRepImpSsColInnName {
+    width: 80%;
+    text-align: center;
+    padding: 0;
+}
+.qfSearchRes .qfRepImpSsColInnName {
+    width: 100%;
+    padding: 0 0 0 20px;
+    text-align: left;
+}
+.qfSearchRes .qfRepImpSsColInnName p {
+    margin: 0;
+    padding: 0;
+    font-size: 0.9em;
+    line-height: 120%;
+}
+.qfRepImpSsColInnName h3 {
+    color: #fff;
+    text-decoration: none;
+    line-height: 120%;
+    padding: 0 15px;
+}
+.qfRepImpSsRight .qfRepImpSsColInnName h3 {
+    color: #5a5a5a;
+}
+.qfUpExpand {
+    padding: 20px;
+    background: #F1F2F2;
+    border: 1px solid #d1d3d4;
+    border-top: 0;
+    display: none;
+}
+.qfUpExpHeading {
+    font-weight: bold;
+    margin: 0 0 5px 0;
+}
+table.upExpTable {
+    width: 100%;
+    border: 1px solid #d1d3d4;
+    border-bottom: 0;
+    font-size: 0.9em;
+}
+table.upExpTable th {
+    padding: 3px 0;
+    font-weight: normal;
+    border-bottom: 1px solid #d1d3d4;
+}
+table.upExpTable td {
+    text-align: center;
+    font-size: 0.9em;
+    width: 20%;
+    font-weight: bold;
+    padding: 3px 0;
+    border-bottom: 1px solid #d1d3d4;
+}
+table.upExpTable tr:nth-child(even) {background: #fff;}
+table.upExpTable tr:nth-child(odd) {background: #f1f2f2;}
+.progressRate {
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.7em;
+}
+.progressBarWrap {
+    text-align: center;
+}
+.progressBarWrap div {
+    display: inline-block;
+    vertical-align: middle;
+}
+.progressBarIcon {
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.progressBarIcon01 {
+    background-image: url(../images/upload-icon2.png);
+}
+.progressBarIcon02 {
+    background-image: url(../images/upload-icon.png);
+}
+.progressBar {
+    width: 50%;
+    height: 22px;
+    border: 1px solid #d1d3d4;
+    text-align: left;
+}
+.progressBar span {
+    display: inline-block;
+    height: 22px;
+    width: 65%;
+    background: #ffbd17;
+}
+.qfUpErrorIcon {
+    display: inline-block;
+    width:80px;
+    height: 70px;
+    background: transparent url(../images/upload-icon3.png) center center no-repeat;
+}
+.qfUpErrorMsg {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+.qfUpErrorMsg p {
+    margin: 20px 0;
+}
+a.qfUpЕррGo {
+    display: inline-block;
+    background: #ffbd17;
+    padding: 10px 25px;
+    text-decoration: none;
+    color: #6e6e6e;
+    font-size: 0.7em;
+    margin: 20px 0;
+}
+.qfTrMarkItemAddDel {
+    text-align: left;
+    margin: 40px 0;
+}
+
+#uploadFile {
+    background: #fff;
+    /*display: inline-block;*/
+    display: none;
+    border: 1px solid #e2e2e2;
+    border-right: 0;
+    height: 44px;
+    padding: 0 10px;
+}
+.fileUpload {
+	position: relative;
+	/*overflow: hidden;*/
+	margin: 0 0 0 -6px;
+    display: inline-block;
+    background: #ffbd17;
+    color: #6e6e6e;
+    padding: 7px 25px;
+    margin: 0 0 20px 0;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.fileUpload:hover {
+    background: #333;
+    color: #fff;
+}
+.fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.qfSearchTagExpMarker {
+    display: inline-block;
+    height: 10px;
+    position: absolute;
+    right: 10px;
+    top: 26px;
+    width: 10px;
+	background: transparent url(../images/exp-arr.png) left top no-repeat;
+}
+.qfSearchTagSelected .qfSearchTagExpMarker {
+    background: url("../images/exp-arr-up.png") no-repeat scroll left top transparent;
+    height: 10px;
+    position: absolute;
+    right: 10px;
+    top: 26px;
+    width: 10px;
+}
+#progressbar {
+    display: inline-block;
+    vertical-align: middle;
+    width: 50%;
+    height: 22px;
+    border: 1px solid #d1d3d4;
+    text-align: left;
+}
+/*
+#progressBar {
+        width: 400px;
+        height: 22px;
+        border: 1px solid #111;
+        background-color: #292929;
+}
+
+#progressBar div {
+        height: 100%;
+        color: #fff;
+        text-align: right;
+        line-height: 22px;
+        width: 0;
+        background-color: #0099ff;
+}
+*/
+
+#qfUploadFl {
+    display: none;
+}
+.flUpload .qfUpFlImg {
+    display: inline-block;
+    width: 60px;
+    height: 62px;
+    position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+    border: 0;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.qfTrMarksFilters {
+    margin: 20px 0;
+}
+.qfTrMarksFilters .qfTrMarksFilter {
+    display: inline-block;
+    margin: 0 10px 0 0;
+}
+.qfTrMarksFilters .qfTrMarksFilter select,
+.qfTrMarksFilters .qfTrMarksFilter input {
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #d1d3d4;
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.qfTrMarksFilters .qfTrMarksFilter input {
+    padding: 6px 5px;
+}
+.qfTrMrSearch {
+    background: #fff url(../images/search.png) 97% 50% no-repeat;
+}
+
+select.qfDdSel {
+    width: 100%;
+    padding: 9px 7px;
+    border: 1px solid #d1d3d2;
+    margin: 0 0 20px 0;
+}
+
+.error {
+	color: #ff8080;
+}
+input.error {
+	border: 1px solid #ff8080;
+}
+
+#progress1, #progress2 {
+    background: none repeat scroll 0 0 #ffbd17;
+    display: none;
+    height: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    position: relative;
+    width: 96%;
+}
+#prog_num1, #prog_num2 {
+    color: #FFFFFF;
+    font-family: Codepro,Tahoma,Geneva,sans-serif;
+    font-size: 12px;
+    left: 5px;
+    position: absolute;
+    top: 2px;
+}
+#progress_achieved1, #progress_achieved2 {
+    background: none repeat scroll 0 0 #565656;
+    height: 10px;
+    margin-left: 5%;
+    position: absolute;
+    width: 10%;
+    top: 10px;
+}
+#progress_bg1, #progress_bg2 {
+    background: none repeat scroll 0 0 #FFFFFF;
+    height: 10px;
+    margin-left: 5%;
+    position: absolute;
+    width: 90%;
+    top: 10px;
+}
+#progress_achieved1, #progress_bg1, #progress_achieved2, #progress_bg2,  {
+    left: 4%;
+    top: 11px;
+}
+.hasDatepicker {
+	cursor: pointer;
+}
+
+
+/* NEWEST TWEAKS */
+
+.qfDateReg {
+    bottom: 2px;
+    font-size: 12px;
+    position: absolute;
+    right: 5px;
+    text-align: right;
+	color: #666;
+}
+
+.form-holder {
+	margin: 0 0 30px 0;
+}
+.qfHeaderPrintWrap {
+	display:none;
+}
+.qfUpProgressWrap {
+    display: none;
+}
+.qfRepImpSsColInnName p {
+    margin: 0;
+}
+.qfRepImpSsColInnName img {
+    max-height: 40px;
+    vertical-align: middle;
+    margin: 0 15px 0 0;
+}
+.qfSearchListWrap.qfBoxBorderBg а {text-decoration: none;}
+.qfImpReport .qfSearchListWrap a {
+    text-decoration: none;
+}
+.qfSearchMatch .qfSessLogoContainer {
+	margin-bottom: 15px;
+}
+.qfSearchMatchParams p,
+.qfSearchMatchData p{
+	margin-bottom: 3px;
+}
+
+.qfRepImpSsColInn a.qfSessCtrlBtn {width: 40px; height: 50px; background-position: 50% 50%;}
+.qfRepImpSsColInn .qfRepImpSsColInnName {text-align: left; float: left;}
+
+.check_delete {padding: 0 0 0 10px; width: 30px;}
+
+
+@media print {
+	.qfHeaderWrap {display: none;}
+    .qfMainNav {display: none;}
+    .qfSessColorsContainer img {width: 100%;}
+	.qfSessMainCtrls {display: none;}
+	.qfEntryHeader {display: none;}
+	.qfEntryContent {margin-top:0px;}
+	.qfHeaderPrintWrap {display:block;margin: 0 0 10px 0;}
+	.qfHeaderPrintWrap img {height: 60px;}
+    .qfSessClasTable {display: inline-block;margin: 0 5px 5px 0;}
+	.qfSessClasTable .qfSessClasCell.qfSessClasTxt {display: none; overflow: visible;height:auto;}
+    .qfSessCellRevStyle {border: 2px solid #418382;}
+    .qfSessCellRevStyle .qfSessBlockHeading {border-bottom: 1px solid #418382;}
+    .qfSessCellRevStyle .qfSessBlockHeading h3 {color: #418382;}
+	.qfSessFullBlock.qfSessHeading h1 {font-size: 1.3em;}
+}

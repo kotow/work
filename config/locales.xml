@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locales>
+
+	<!-- NICE classes -->
+	<locale label="nice.class_01" description="Nice class 01">
+		<item lang="en" value="Химически продукти, предназначени за промишлеността, науката, фотографията, селското стопанство, градинарството и горското стопанство; изкуствени смоли в необработено състояние, пластмаси в необработено състояние; торове; пожарогасителни състави; препарати за закаляване и заваряване на метали; химически вещества за консервиране на храни; дъбилни вещества; адхезиви (лепливи вещества), предназначени за промишлеността." />
+	</locale>
+	<locale label="nice.class_02" description="Nice class 02">
+		<item lang="en" value="Бои, лакове, политури; антикорозионни вещества и вещества, предпазващи дървения материал от повреждане; оцветители; байцове; необработени естествени смоли; метали във вид на фолио и прах за бояджии, декоратори, печатари и художници." />
+	</locale>
+	<locale label="nice.class_03" description="Nice class 03">
+		<item lang="en" value="Препарати за избелване и пране; препарати за почистване, полиране, обезмасляване и шлифоване; сапуни; парфюмерия, етерични масла, козметика, лосиони за коса; средства за почистване на зъби." />
+	</locale>
+	<locale label="nice.class_04" description="Nice class 04">
+		<item lang="en" value="Промишлени масла и греси; смазки; препарати за абсорбиране на прах, омокрящи и свързващи средства; горива (включително моторно гориво) и осветителни вещества; свещи, фитили." />
+	</locale>
+	<locale label="nice.class_05" description="Nice class 05">
+		<item lang="en" value="Фармацевтични и ветеринарни препарати; хигиенни препарати за медицински цели; диетични храни и вещества за медицински или ветеринарни цели, бебешки храни; диетични добавки за хора и животни; пластири, превързочни материали; материали за пломбиране на зъби и за зъбни отливки; дезинфектанти; препарати за унищожаване на вредни животни; фунгициди, хербициди." />
+	</locale>
+	<locale label="nice.class_06" description="Nice class 06">
+		<item lang="en" value="Неблагородни метали и техните сплави; метални строителни материали; преносими метални конструкции; метални материали за железопътни линии; неелектрически метални кабели и жици; железария, метална кинкалерия; метални тръби; метални каси; стоки от неблагородни метали, които не са включени в други класове; руди." />
+	</locale>
+	<locale label="nice.class_07" description="Nice class 07">
+		<item lang="en" value="Машини и машинни инструменти; електродвигатели и двигатели с вътрешно горене (с изключение на такива за сухопътни превозни средства); съединителни елементи и трансмисионни предавки (с изключение на такива за сухопътни превозни средства); селскостопански инструменти, с изключение на ръчно задвижвани; инкубатори за яйца; автомати за продажба." />
+	</locale>
+	<locale label="nice.class_08" description="Nice class 08">
+		<item lang="en" value="Ръчни, ръчно задвижвани инструменти и сечива; ножарски изделия и прибори за хранене; хладни оръжия; бръсначи." />
+	</locale>
+	<locale label="nice.class_09" description="Nice class 09">
+		<item lang="en" value="Научни, навигационни, геодезични, фотографски, кинематографични, оптични, теглилни, измервателни, сигнални, контролни, надзорни, животоспасяващи и учебни апарати и уреди; апарати и уреди за провеждане, комутиране, трансформиране, акумулиране, регулиране и управление на електричество; апарати за записване, предаване или възпроизвеждане на звук или образ; магнитни носители на данни, записващи дискове; компакт дискове, DVD и други носители на цифрова информация; механизми за монетни апарати; касови апарати, изчислителни машини, оборудване за обработка на информация, компютри; компютърен софтуер; пожарогасители." />
+	</locale>
+	<locale label="nice.class_10" description="Nice class 10">
+		<item lang="en" value="Хирургически, медицински, стоматологични и ветеринарни апарати и инструменти, изкуствени крайници, очи и зъби; ортопедични изделия; хирургични материали." />
+	</locale>
+
+	<locale label="nice.class_11" description="Nice class 11">
+		<item lang="en" value="Уреди за осветление, отопление, парогенериране, готвене, охлаждане, сушене, вентилация, водоснабдяване и за санитарни цели." />
+	</locale>
+	<locale label="nice.class_12" description="Nice class 12">
+		<item lang="en" value="Превозни средства; апарати за придвижване по земя, вода и въздух." />
+	</locale>
+	<locale label="nice.class_13" description="Nice class 13">
+		<item lang="en" value="Огнестрелно оръжие; амуниции и снаряди; експлозиви; пиротехнически средства." />
+	</locale>
+	<locale label="nice.class_14" description="Nice class 14">
+		<item lang="en" value="Благородни метали и техните сплави, и изделия от благородни метали или с такова покритие, които не са включени в други класове; бижутерия, скъпоценни камъни; часовници и хронометрични уреди." />
+	</locale>
+	<locale label="nice.class_15" description="Nice class 15">
+		<item lang="en" value="Музикални инструменти." />
+	</locale>
+	<locale label="nice.class_16" description="Nice class 16">
+		<item lang="en" value="Хартия, картон и стоки от тези материали, които не са включени в други класове; печатни произведения; материали за подвързване на книги; фотографии; канцеларски принадлежности; канцеларски лепила и лепила за домакински цели; материали за художници; четки за рисуване; пишещи машини и канцеларско оборудване (с изключение на мебели); учебни материали (с изключение на апарати); пластмасови материали за опаковки (които не са включени в други класове); печатарски букви; клишета." />
+	</locale>
+	<locale label="nice.class_17" description="Nice class 17">
+		<item lang="en" value="Каучук, гутаперча, гума, азбест, слюда и стоки от тези материали, които не са включени в други класове; формувани пластмаси за производството; материали за запушване, уплътняване и изолиране; неметални гъвкави тръби." />
+	</locale>
+	<locale label="nice.class_18" description="Nice class 18">
+		<item lang="en" value="Кожа и имитации на кожа и стоки от тези материали, които не са включени в други класове; необработени кожи; куфари и пътни чанти; чадъри и слънчобрани; бастуни; камшици, хамути и сарашки стоки." />
+	</locale>
+	<locale label="nice.class_19" description="Nice class 19">
+		<item lang="en" value="Неметални строителни материали; неметални твърди тръби за строителството; асфалт, катран и битум; неметални преносими конструкции; неметални паметници." />
+	</locale>
+	<locale label="nice.class_20" description="Nice class 20">
+		<item lang="en" value="Мебели, огледала, рамки за картини; стоки (които не са включени в други класове) от дърво, корк, камъш, тръстика, ракита, рог, кост, слонова кост, бален, раковина, кехлибар, седеф, морска пяна и от заместители на тези материали или от пластмаса." />
+	</locale>
+	
+	<locale label="nice.class_21" description="Nice class 21">
+		<item lang="en" value="Домакински или кухненски прибори и съдове; гребени и гъби; четки (с изключение на четки за рисуване); материали за изработване на четки; средства за почистване; стоманена тел за домакински цели; необработено или полуобработено стъкло (с изключение на стъкло, използвано в строителството); стъклария, порцеланови и керамични изделия, които не са включени в други класове." />
+	</locale>
+	<locale label="nice.class_22" description="Nice class 22">
+		<item lang="en" value="Въжета, канап, мрежи, навеси, чергила, брезент, корабни платна, торби и чанти (които не са включени в други класове); материали за подложки и пълнеж (с изключение на каучукови или пластмасови); текстилни материали от необработени влакна." />
+	</locale>
+	<locale label="nice.class_23" description="Nice class 23">
+		<item lang="en" value="Прежди и конци за текстилна употреба." />
+	</locale>
+	<locale label="nice.class_24" description="Nice class 24">
+		<item lang="en" value="Текстил и текстилни изделия, които не са включени в други класове; покривки за легла; покривки за маси." />
+	</locale>
+	<locale label="nice.class_25" description="Nice class 25">
+		<item lang="en" value="Облекло, обувки, шапки и други принадлежности за глава." />
+	</locale>
+	<locale label="nice.class_26" description="Nice class 26">
+		<item lang="en" value="Дантели и бродерии, панделки и ширити; копчета, телени копчета, карфици и игли; изкуствени цветя." />
+	</locale>
+	<locale label="nice.class_27" description="Nice class 27">
+		<item lang="en" value="Килими, черги, изтривалки, рогозки, линолеум и други материали за подови покрития; нетекстилни тапети за стени." />
+	</locale>
+	<locale label="nice.class_28" description="Nice class 28">
+		<item lang="en" value="Игри и играчки; гимнастически и спортни артикули, които не са включени в други класове; украшения за коледни елхи." />
+	</locale>
+	<locale label="nice.class_29" description="Nice class 29">
+		<item lang="en" value="Месо, риба, птици и дивеч; месни екстракти; консервирани, замразени, сушени, варени и печени плодове и зеленчуци; желета, конфитюри и компоти; яйца; мляко и млечни произведения; хранителни масла и мазнини." />
+	</locale>
+	<locale label="nice.class_30" description="Nice class 30">
+		<item lang="en" value="Кафе, чай, какао и заместители на кафе; ориз; тапиока и саго; брашно и произведения от зърнени храни; хляб, сладкиши и захарни изделия; сладоледи; захар, мед, меласа; мая, бакпулвер; сол; горчица; оцет, сосове (подправки); подправки; лед." />
+	</locale>
+
+	<locale label="nice.class_31" description="Nice class 31">
+		<item lang="en" value="Семена и селскостопански, градинарски и горски продукти, които не са включени в други класове; живи животни; пресни плодове и зеленчуци; семена за посев; живи растения и цветя; храни за животни; малц." />
+	</locale>
+	<locale label="nice.class_32" description="Nice class 32">
+		<item lang="en" value="Бира; минерални и газирани води и други безалкохолн и напитки; плодови напитки и плодови сокове; сиропи и други препарати за приготвяне на напитки." />
+	</locale>
+	<locale label="nice.class_33" description="Nice class 33">
+		<item lang="en" value="Алкохолни напитки (с изключение на бира)." />
+	</locale>
+	<locale label="nice.class_34" description="Nice class 34">
+		<item lang="en" value="Тютюн; принадлежности за пушачи; кибрит." />
+	</locale>
+	<locale label="nice.class_35" description="Nice class 35">
+		<item lang="en" value="Реклама; управление на търговски сделки; търговска администрация; административна дейност." />
+	</locale>
+	<locale label="nice.class_36" description="Nice class 36">
+		<item lang="en" value="Застрахователна дейност; финансови сделки; парични сделки; сделки с недвижимо имущество." />
+	</locale>
+	<locale label="nice.class_37" description="Nice class 37">
+		<item lang="en" value="Строителство; ремонт; монтажни услуги." />
+	</locale>
+	<locale label="nice.class_38" description="Nice class 38">
+		<item lang="en" value="Телекомуникации." />
+	</locale>
+	<locale label="nice.class_39" description="Nice class 39">
+		<item lang="en" value="Транспорт; опаковане и съхраняване на стоки; организиране на пътувания." />
+	</locale>
+	<locale label="nice.class_40" description="Nice class 40">
+		<item lang="en" value="Обработване на материали." />
+	</locale>
+
+	<locale label="nice.class_41" description="Nice class 41">
+		<item lang="en" value="Образование; обучение; развлечение, спортна и културна дейност." />
+	</locale>
+	<locale label="nice.class_42" description="Nice class 42">
+		<item lang="en" value="Научни и технологически услуги и свързани с тях изследователски и проектантски услуги; промишлени анализи и проучвания; проектиране и разработване на компютърен софтуер и хардуер." />
+	</locale>
+	<locale label="nice.class_43" description="Nice class 43">
+		<item lang="en" value="Ресторантьорство; временно настаняване." />
+	</locale>
+	<locale label="nice.class_44" description="Nice class 44">
+		<item lang="en" value="Медицинско обслужване; ветеринарни услуги; грижи за хигиената и красотата на хора и животни; услуги в областта на селското стопанство, градинарството и лесовъдството." />
+	</locale>
+	<locale label="nice.class_45" description="Nice class 43">
+		<item lang="en" value="Юридически услуги; охранителни услуги с цел закрила на собственост и хора; персонални и социални услуги, извършвани от трети лица с цел удовлетворяване на нуждите на индивидите." />
+	</locale>
+
+	<!-- SYSTEM module -->
+	<locale label="system.validate_regexp_error" description="Invalid data on validate regexp">
+		<item lang="en" value="invalid data" />
+	</locale>
+
+	<locale label="system.validate_string_error" description="Invalid data on validate string">
+		<item lang="en" value="invalid data" />
+	</locale>
+
+	<locale label="system.validate_integer_error">
+		<item lang="en" value="you must enter a number" />
+	</locale>
+
+	<locale label="system.validate_float_error">
+		<item lang="en" value="you must enter a decimal number" />
+	</locale>
+
+	<locale label="system.validate_email_error">
+		<item lang="en" value="you must enter a valid email" />
+	</locale>
+
+	<locale label="system.validate_url_error">
+		<item lang="en" value="you must enter a valid url address" />
+	</locale>
+
+	<!-- MEDIA module -->
+
+	<locale label="media.UPLOAD_ERR_INI_SIZE">
+		<item lang="en" value="file exceeds size limit" />
+	</locale>
+
+	<locale label="media.UPLOAD_ERR_FORM_SIZE">
+		<item lang="en" value="file exceeds size limit" />
+	</locale>
+
+	<locale label="media.UPLOAD_ERR_PARTIAL">
+		<item lang="en" value="file was partially uploaded" />
+	</locale>
+
+	<locale label="media.UPLOAD_ERR_NO_FILE">
+		<item lang="en" value="please select a file for upload" />
+	</locale>
+
+	<locale label="media.UPLOAD_ERR_NO_TMP_DIR">
+		<item lang="en" value="no temp directory" />
+	</locale>
+
+	<locale label="media.UPLOAD_ERR_CANT_WRITE">
+		<item lang="en" value="can't write file" />
+	</locale>
+
+	<locale label="media.UPLOAD_ERR_WRONG_FILE_TYPE">
+		<item lang="en" value="wrong file type" />
+		<!--item lang="bg" value="грешен тип" /-->
+	</locale>
+
+	<locale label="media.UPLOAD_ERR_WRONG_FILE_TYPE">
+		<item lang="en" value="wrong file type" />
+		<!--item lang="bg" value="грешен тип" /-->
+	</locale>
+
+	<locale label="media.upload_err_wrong_file_type">
+		<item lang="en" value="грешен тип на изображението (GIF, JPG, PNG)" />
+	</locale>
+
+	<locale label="media.upload_success">
+		<item lang="en" value="file uploaded successfully" />
+		<!--item lang="bg" value="документа беше качен успешно" /-->
+	</locale>
+
+	<locale label="media.file_exists">
+		<item lang="en" value="a file with this name already exists!" />
+		<!--item lang="bg" value="документ с това име вече съществува" /-->
+	</locale>
+
+	<!-- USER module -->
+	
+	<locale label="user.Not-active" description="Not-active user">
+		<item lang="en" value="User is not active" />
+	</locale>
+	<locale label="user.Wrong-login" description="Wrong login/password">
+		<item lang="en" value="Wrong login/password" />
+	</locale>
+	
+	<!-- WEBSITE module -->
+
+	<locale label="website.no-cf_name" description="Error on the name field on the contact form">
+		<item lang="en" value="Please enter your name" />
+	</locale>
+
+	<locale label="website.no-cf_email" description="Error on the email field on the contact form">
+		<item lang="en" value="Please enter your email" />
+	</locale>
+
+	<locale label="website.no-cf_msg" description="Error on the message field on the contact form">
+		<item lang="en" value="Please enter your message" />
+	</locale>
+
+	<locale label="website.no-cf_captcha" description="Error on the captcha field on the contact form">
+		<item lang="en" value="Please enter the captcha" />
+	</locale>
+
+	<locale label="website.wrong-cf_email" description="Error on the email field on the contact form">
+		<item lang="en" value="Please enter a valid email" />
+	</locale>
+
+	<locale label="website.wrong-Captcha" description="Error on the captcha field on the contact form">
+		<item lang="en" value="Please enter the right captcha" />
+	</locale>
+	
+	<locale label="label" description="Label">
+		<item lang="en" value="Наименование" />
+	</locale>
+	<locale label="applicationnumber" description="Application Number">
+		<item lang="en" value="Заявка номер" />
+	</locale>
+	<locale label="registernumber" description="Register Number">
+		<item lang="en" value="Регистров номер" />
+	</locale>
+	<locale label="registrationdate" description="Registration Date">
+		<item lang="en" value="Дата на регистриране" />
+	</locale>
+	<locale label="applicationdate" description="Application Date">
+		<item lang="en" value="НаименДата на заявяване: ование" />
+	</locale>
+	<locale label="expireson" description="Expires On">
+		<item lang="en" value="Срок" />
+	</locale>
+	<locale label="viennaclasses" description="Vienna Classes">
+		<item lang="en" value="Виенската класификация" />
+	</locale>
+	<locale label="niceclasses" description="Nice Classes">
+		<item lang="en" value="Ницска класификация" />
+	</locale>
+	<locale label="rightsowner" description="Rights Owner">
+		<item lang="en" value="Притежател" />
+	</locale>
+	<locale label="rightsrepresentative" description="Rights Representative">
+		<item lang="en" value="Представител" />
+	</locale>
+	<locale label="officeoforigin" description="Office Of Origin">
+		<item lang="en" value="Наименование" />
+	</locale>
+	<locale label="designatedcontractingparty" description="Designated Contracting Party">
+		<item lang="en" value="Държави в които е в сила" />
+	</locale>
+	<locale label="ststus" description="Status">
+		<item lang="en" value="Статус" />
+	</locale>
+	<locale label="kind" description="Kind">
+		<item lang="en" value="Тип" />
+	</locale>
+
+</locales>

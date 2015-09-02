@@ -1,0 +1,12 @@
+[05-Dec-2013 13:32:23 Europe/Sofia] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required '/www/dea-solutions.com/apps/panel/config/config.php' (include_path='.:/usr/local/php53/pear') in /www/dea-solutions.com/cms/root/index.php on line 10
+[07-May-2014 21:48:41 Europe/Sofia] At least 3 non-wildcard characters are required at the beginning of pattern.
+[07-May-2014 21:48:43 Europe/Sofia] At least 3 non-wildcard characters are required at the beginning of pattern.
+[07-May-2014 21:48:58 Europe/Sofia] At least 3 non-wildcard characters are required at the beginning of pattern.
+[07-May-2014 23:19:45 Europe/Sofia] At least 3 non-wildcard characters are required at the beginning of pattern.
+[07-May-2014 23:24:59 Europe/Sofia] At least 3 non-wildcard characters are required at the beginning of pattern.
+[17-Jul-2014 14:26:09 Europe/Sofia] Call to undefined method sfRequest::get
+[17-Jul-2014 14:26:42 Europe/Sofia] Call to undefined method sfRequest::get
+[17-Jul-2014 14:26:54 Europe/Sofia] Call to undefined method sfRequest::get
+[17-Jul-2014 14:26:59 Europe/Sofia] Call to undefined method sfRequest::get
+[17-Jul-2014 14:27:03 Europe/Sofia] Call to undefined method sfRequest::get
+[18-Jul-2014 17:50:30 Europe/Sofia] The template "/www/dea-solutions.com/trademark/lib/modules/test/templates/abcSuccess.php" does not exist in: 

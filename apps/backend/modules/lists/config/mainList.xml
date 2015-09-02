@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects>
+	<object>Lists</object>
+	<object commands="createListitemI18n">Listitem</object>
+	<object >ListitemI18n</object>
+</objects>

@@ -1,0 +1,17 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        :: Bianor Content Management System ::
+    robots:       index, follow
+    description:  Dome CMS
+    keywords:     Done, cms
+    language:     en
+
+  stylesheets:    [panel]
+
+  javascripts:    []
+
+  has_layout:     off
+  layout:         panel

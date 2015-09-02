@@ -1,0 +1,423 @@
+<?php
+/*
+Available options:
+hasTags				-
+mainMasterClass		- mainTag's elements master class
+mainClass			- mainTag's elements class
+mainSubClass		- mainTag's sub elements class
+firstItemClass
+lastItemClass
+itemClass
+currentItemClass
+mainTag
+subTag
+aClass
+currentAClass
+separator
+depth
+hideSecure
+hideLabel
+inPath
+getIndex
+*/
+class MenuHelper
+{
+	public static function get_menu_by_tag($tagname, $options = array())
+	{
+		$menu = Document::getDocumentByExclusiveTag($tagname);
+		if (!$menu)
+		{
+			return null;
+		}
+		/*$path = sfConfig::get('sf_root_dir')."/cache/menus/".$tagname.UtilsHelper::cleanStr($_SERVER['REQUEST_URI']);
+		if (is_readable($path))
+		{
+			return file_get_contents($path);
+		}*/
+		$content = self::buildMenu($menu, array(), null, $options);
+		//FileHelper::writeFile($path, $content);
+		return $content;
+	}
+
+	public static function getSiteMap($root = null , &$sitemap, $depth = 1000, $level = 1, $path = null, $getindex = false, $getInvisible = false)
+	{
+		$nolabel = UtilsHelper::Localize("website.frontend.nolabel");
+		if (!$root)
+		{
+			$root = Rootfolder::getRootfolderByModule("website");
+			if(!$root) return;
+		}
+		if (is_object($root))
+		{
+			$root = $root->getId();
+		}
+		$pathSet = false;
+
+		if (Document::hasChildren($root))
+		{
+			$oldRelationsFlag = sfConfig::get('sf_cache_relations');
+			sfConfig::set('sf_cache_relations', false);
+
+			$page_CatI18n = $page_SvrCat = null;
+			try
+			{
+				$children = Document::getChildrenOf($root, null, true, false);
+				foreach ($children as $child)
+				{
+					$href = "";
+					$label = $nolabel;
+					$childId = $child->getId();
+
+					if(Document::getStatus($childId) != UtilsHelper::STATUS_ACTIVE) continue;
+					
+					$childI18n = Document::getDocumentByCulture($child);
+					if ($childI18n)
+					{
+						$i18class = get_class($childI18n);
+						if ($i18class == 'Urlrewrite') continue;
+						$childI18nId = $childI18n->getId();
+
+						if (!$getindex && Document::hasTag($child, "website_page_index"))
+						{
+							continue;
+						}
+
+						if (!$getInvisible && ($class == 'Page' || $class = 'Topic'))
+						{
+							if (Document::hasTag($child, "website_page_nonvisible") || Document::hasTag($child, "website_topic_nonvisible"))
+							{
+								continue;
+							}
+						}
+
+						if ($i18class == "PageI18n" )
+						{
+							$type = $childI18n->getPageType();
+							$secure = $childI18n->getIsSecure();
+							//$label = $childI18n->getLabel();
+							$label = $childI18n->getNavigationTitle();
+							$href = $childI18n->getHref();
+							$id = $childI18nId;
+							if ($type == "REFERENCE")
+							{
+								$id = $childI18n->getPageId();
+								//$pg = Document::getDocumentInstance($id);// get Page object
+								//if ($pg)
+								{
+									$pg = Document::getDocumentByCulture($id, null, true); // get PageI18n object
+									if($pg)
+									{
+										$id = $pg->getId();
+										$href = $pg->getHref();
+									}
+								}
+							}
+							elseif ($type == "EXTERNAL")
+							{
+								$href = $childI18n->getUrl();
+							}
+						}
+						elseif ($i18class == "Page")
+						{
+							$label .= "(".$childI18n->getLabel().")";
+						}
+						elseif ($i18class == "TopicI18n")
+						{
+							$label = $childI18n->getLabel();
+							$indexPage = $childI18n->getIndexPage();
+							$id = $childI18n->getId();
+							if ($indexPage)
+							{
+								$id = $indexPage->getId();
+								$href = $indexPage->getHref();
+								$secure = $indexPage->getIsSecure();
+							}
+						}
+						elseif ($i18class == "Topic")
+						{
+							$label .= " (".$childI18n->getLabel().")";
+							$indexPage = $childI18n->getIndexPage();
+							if ($indexPage)
+							{
+								$id = $indexPage->getId();
+								$href = $indexPage->getHref();
+								$label = $indexPage->getLabel();
+							}
+						}
+						else
+						{
+							$id = $childI18nId;
+							$label = $childI18n->getLabel();
+						}
+
+						if ($id && !$pathSet)
+						{
+							$path[] = $id;
+							$pathSet = true;
+						}
+						else
+						{
+							$c = count($path);
+							$path[$c-1] = $id;
+						}
+						
+						$sitemap[$root][$childId]['path'] = $path;
+						$sitemap[$root][$childId]['id'] = $id;
+						$sitemap[$root][$childId]['href'] = $href;
+						$sitemap[$root][$childId]['label'] = $label;
+						if (array_key_exists('secure', $sitemap[$root][$childId]))
+							$sitemap[$root][$childId]['secure'] = $secure;
+						$sitemap[$root][$childId]['level'] = $level;
+						$sitemap[$root][$childId]['model'] = $i18class;
+					}
+
+					self::getSiteMap($child->getId(), $sitemap, $depth, $level+1, $path, $getindex, $getInvisible);
+				}
+			}
+			catch (Exception $e)
+			{
+				return null;
+			}
+			sfConfig::set('sf_cache_relations', $oldRelationsFlag);
+		}
+		return $sitemap;
+	}
+
+	public static function buildMenu($root, $menuItems = array(), $rootId = null, $options = array(), $siteMap = null)
+	{
+
+		$defOptionsArr = array(
+			"hasTags" => false,
+			"mainMasterClass" => false,
+			"mainMasterStyle" => false,
+			"mainMasterId" => false,
+			"mainClass" => false,
+			"mainSubClass" => false,
+			"firstItemClass" => false,
+			"lastItemClass" => false,
+			"itemClass" => false,
+			"currentItemClass" => false,
+			"mainTag" => false,
+			"subTag" => false,
+			"aClass" => false,
+			"currentAClass" => false,
+			"separator" => false,
+			"depth" => false,
+			"hideSecure" => false,
+			"hideLabel" => false,
+			"inPath" => false,
+			"getIndex" => false
+		);
+
+		foreach($defOptionsArr as $okey => $oval)
+		{
+			if(!array_key_exists($okey, $options)) $options[$okey] = false;
+		}
+//var_dump($options);
+		if ($options['inPath'] && !$siteMap)
+		{
+			self::getSiteMap(null, $siteMap, 1000, 1, null, false, true);
+			if ($options['mainMasterClass'] == 'menu-list') var_dump($siteMap);
+		}
+		$sfcontext = sfContext::getInstance();
+		if (!$rootId)
+		{
+			if(is_object($root))
+			{
+				$root = $root->getId();
+			}
+
+			$rootId = $root;
+			$depth = isset($options['depth']) ? $options['depth'] : 1000;
+			$menuItems = self::getSiteMap($rootId, $menuItems, $depth, 1, null , $options['getIndex']);
+			if ($options["mainMasterClass"])
+				$class = $options["mainMasterClass"];
+			if ($options["mainMasterId"])
+				$masterId = $options["mainMasterId"];
+			if ($options["mainMasterStyle"])
+				$masterStyle = $options["mainMasterStyle"];
+			$options['depth'] = $depth;
+		}
+
+		if (!isset($class) && $options["mainSubClass"])
+			$class = $options["mainSubClass"];
+		if ($options["mainClass"])
+			$class .= " ".$options["mainClass"];
+
+		$tag = $options["mainTag"] ? $options["mainTag"] : "ul";
+		$subTag = ($options["subTag"] && ($tag != "ul" || $tag != "ol")) ? $options["subTag"] : "li";
+
+		$add = '';
+		if ($class)
+			$add .= " class='$class'";
+		if ($masterId)
+			$add .= " id='$masterId'";
+		if ($masterStyle)
+			$add .= " style='$masterStyle'";
+		if($tag != 'none') $content = "<$tag".$add.">";
+
+		$i = 1;
+		if (array_key_exists($rootId, $menuItems))
+		{
+			$nbr = count($menuItems[$rootId]);
+var_dump($menuItems[$rootId]); echo "<br>";
+var_dump($siteMap[$rootId]);
+			foreach ($menuItems[$rootId] as $k => $item)
+			{
+				$newOptions = array();
+				foreach ($options as $key => $option)
+				{
+					$newOptions[$key] = str_replace("%INDEX%", $i, $option);
+				}
+
+				if ($newOptions['hideLabel'])
+				{
+					$label = "";
+				}
+				else
+				{
+					$label = $item['label'];
+				}
+				
+				if ($item['model'] != "Website" && $item['model'] != "Menu")
+				{
+					if ($newOptions['separator'] && $i > 1)
+					{
+						$content .= $newOptions['separator'];
+					}
+
+					if ($newOptions["hideSecure"] == true)
+					{
+						if (!isset($authentificated))
+						{
+							$user = $sfcontext->getUser();
+							$authentificated = $user->isAuthenticated();
+						}
+						if ($item["secure"] == 1 && $authentificated == false) continue;
+					}
+
+					$itemClass = '';
+					if ($newOptions['currentItemClass'])
+					{
+						$pageref = $sfcontext->getRequest()->getParameter("pageref");
+
+						if ($newOptions['inPath'])
+						{
+							if ($p = Document::getParentOf($pageref))
+							{
+								$pId = $p->getId();
+								if ($pp = Document::getParentOf($pId))
+								{
+									$ppId = $pp->getId();
+									$existInPath = in_array($item['id'], $siteMap[$ppId][$pId]['path']);
+								}
+							}
+							if ($pageref == 1795)
+							{
+								echo "1)RefID=".$item['id']; var_dump(); echo "<br/>";
+							}
+						}
+
+						if (!isset($existInPath))
+							$existInPath = false;
+						if ($pageref == $item['id'] || $existInPath)
+						{
+							$itemClass = $newOptions['currentItemClass'];
+						}
+						else
+						{
+							if ($newOptions["itemClass"]) $itemClass = $newOptions["itemClass"];
+						}
+					}
+					else
+					{
+						if ($newOptions["itemClass"]) $itemClass = $newOptions["itemClass"];
+					}
+
+					if ($i == 1 && $newOptions['firstItemClass'])
+						$itemClass .= " ".$newOptions['firstItemClass'];
+					if ($i == $nbr && $newOptions['lastItemClass'])
+						$itemClass .= " ".$newOptions['lastItemClass'];
+
+					if ($itemClass)
+						$itemClass = " class='".trim($itemClass)."'";
+
+					$existInPath = false; $aClass = ' class="';
+					if ($newOptions['currentAClass'])
+					{
+						if (!isset($pageref) || !$pageref)
+							$pageref = $sfcontext->getRequest()->getParameter("pageref");
+						if ($newOptions['inPath'])
+						{
+							if (!$p)
+							{
+								if ($p = Document::getParentOf($pageref))
+								{
+									$pId = $p->getId();
+									if ($pp = Document::getParentOf($pId))
+									{
+										$ppId = $pp->getId();
+										$existInPath = in_array($item['id'], $siteMap[$ppId][$pId]['path']);
+									}
+								}
+								if ($pageref == 1795)
+								{
+									echo "2)RefID=".$item['id']; var_dump(); echo "<br/>";
+								}
+							}
+						}
+
+						if (!isset($existInPath))
+							$existInPath = false;
+
+						if($pageref == $item['id'] || $existInPath)
+						{
+							$aClass .= $newOptions['currentAClass'];
+						}
+						else
+						{
+							if ($newOptions['aClass'])
+								$aClass .= $newOptions['aClass'];
+						}
+					}
+					else
+					{
+						if ($newOptions['aClass'])
+							$aClass .= $newOptions['aClass'];
+					}
+
+					$aClass .= '" ';
+				
+					if(empty($item["href"]))
+					{
+						if($tag != 'none') 
+							$content .= "<$subTag".$itemClass."><a href=\"javascript:void(0)\" ".$aClass.">".$label."</a>";
+						else
+							$content .= "<a href=\"javascript:void(0)\" ".$aClass.">".$label."</a>";
+					}
+					else
+					{
+						if($tag != 'none')
+							$content .= "<$subTag".$itemClass."><a href=\"".$item['href']."\"".$aClass." title=\"".$item['label']."\">".$label."</a>";
+						else
+							$content .= "<a href=\"".$item['href']."\"".$aClass." title=\"".$item['label']."\">".$label."</a>";
+					}
+
+				}
+				if (array_key_exists($k, $menuItems) && $menuItems[$k] && ($item['level'] < $newOptions['depth']))
+				{
+					$content .= self::buildMenu(null, $menuItems, $k, $options);
+				}
+				if ($item['model'] != "Website" && $item['model'] != "Menu")
+				{
+					$content .= "</$subTag>";
+				}
+
+				$i++;
+			}
+		}
+		$content .= "</$tag>";
+		return $content;
+	}
+}
+?>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects>
+	<object commands="createWebsite">Rootfolder</object>
+	<object commands="createMenu,createTopic,createPage">Website</object>
+	<object commands="createTopic,createPage">Menu</object>
+	<object commands="createTopicI18n,createTopic,createPage">Topic</object>
+</objects>

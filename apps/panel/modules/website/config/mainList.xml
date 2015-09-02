@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects>
+	<object>Website</object>
+	<object>Menu</object>
+	<object>Topic</object>
+	<object commands="createPageI18n">Page</object>
+	<!--<object commands="-order">PageI18n</object>-->
+	<object>Folder</object>
+</objects>

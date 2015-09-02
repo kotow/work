@@ -1,0 +1,9 @@
+<?php
+
+	$settings = array();
+	$settings['main_email']['en'] = "cto@dea-advertising.com";
+	$settings['telephone']['en'] = "202 600 6000";
+	$settings['read_more_home_button']['en'] = "about-us.html";
+	$settings['taxes']['en'] = "0";
+
+?>

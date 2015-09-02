@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<documents>
+
+	<document name="Trademark" table="m_trademark" type="Keyword">
+		<index name="Label" />
+		<index name="ApplicationNumber" />
+		<index name="RegisterNumber" />
+		<index name="RegistrationDate" />
+		<index name="ApplicationDate" />
+		<index name="ExpiresOn" />
+		<index name="ViennaClasses" />
+		<index name="NiceClasses" />
+		<index name="RightsOwner" />
+		<index name="RightsRepresentative" />
+		<index name="Kind" />
+		<index name="Status" />
+		<index name="DesignatedContractingParty" />
+	</document>
+
+</documents>

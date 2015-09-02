@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects>
+	<object commands="createLists">Rootfolder</object>
+	<object commands="createListitem">Lists</object>
+</objects>

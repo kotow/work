@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects>
+	<object commands="createFolder,createTag">Rootfolder</object>
+	<object commands="createFolder,createTag">Folder</object>
+	<object commands="">Tag</object>
+	<object commands="">User</object>
+</objects>

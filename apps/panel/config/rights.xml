@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rights>
+
+	<user label="admin">
+		<module name="admin">
+			<objects>
+				<object commands="createTag">Rootfolder</object>
+				<object commands="">Tag</object>
+			</objects>
+		</module>
+		<module name="lists">
+			<objects>
+				<object commands="createLists">Rootfolder</object>
+				<object commands="createListitem">Lists</object>
+				<object commands="">Listitem</object>
+			</objects>
+		</module>
+		<module name="website">
+			<objects>
+				<object commands="createWebsite">Rootfolder</object>
+				<object commands="createMenu,createTopic,createPage">Website</object>
+				<object commands="createTopic,createPage">Menu</object>
+				<object commands="createTopic,createPage">Topic</object>
+				<object commands="">Page</object>
+			</objects>
+		</module>
+		<module name="user">
+			<objects>
+				<object commands="createUser">Rootfolder</object>
+				<object commands="">User</object>
+			</objects>
+		</module>
+		<module name="media">
+			<objects>
+				<object commands="createFolder,createMedia">Rootfolder</object>
+				<object commands="createFolder,createMedia">Folder</object>
+				<object commands="">Media</object>
+			</objects>
+		</module>
+<!--
+		<module name="keywords">
+			<objects>
+				<object commands="createKeyword">Rootfolder</object>
+				<object commands="">Keyword</object>
+			</objects>
+		</module>
+		<module name="news">
+			<objects>
+				<object commands="createNews">Rootfolder</object>
+				<object commands="">News</object>
+			</objects>
+		</module>
+		<module name="newsletter">
+			<objects>
+				<object commands="createNewsletter,createFolder">Rootfolder</object>
+				<object commands="createMailinglist">Folder</object>
+				<object commands="createSubscriber">Mailinglist</object>
+				<object commands="">Subscriber</object>
+			</objects>
+		</module>
+		<module name="products">
+			<objects>
+				<object commands="createCategory">Rootfolder</object>
+				<object commands="createProduct">Category</object>
+				<object commands="">Product</object>
+			</objects>
+		</module>
+		<module name="galleries">
+			<objects>
+				<object commands="createGallery">Rootfolder</object>
+				<object commands="">Gallery</object>
+			</objects>
+		</module>
+		<module name="slider">
+			<objects>
+				<object commands="createSlider">Rootfolder</object>
+				<object commands="createSlide">Slider</object>
+				<object commands="">Slide</object>
+			</objects>
+		</module>
+-->
+		<module name="clients">
+			<objects>
+				<object commands="createClient">Rootfolder</object>
+				<object commands="">Client</object>
+			</objects>
+		</module>
+		<module name="trademarks">
+			<objects>
+				<object commands="createTrademark">Rootfolder</object>
+				<object commands="">Trademark</object>
+			</objects>
+		</module>
+		<module name="search">
+			<objects>
+				<object commands="createBrand">Rootfolder</object>
+				<object commands="createSearch">Brand</object>
+				<object commands="">Search</object>
+			</objects>
+		</module>
+
+		<module name="labels">
+			<objects>
+				<object commands="-order,-delete">Rootfolder</object>
+			</objects>
+		</module>
+		<module name="settings">
+			<objects>
+				<object commands="-order,-delete">Rootfolder</object>
+			</objects>
+		</module>
+	</user>
+
+	<user label="site_admin">
+		<module name="website">
+			<objects>
+				<object commands="createWebsite">Rootfolder</object>
+				<object commands="createMenu,createTopic,createPage">Website</object>
+				<object commands="createTopic,createPage">Menu</object>
+				<object commands="createTopic,createPage">Topic</object>
+				<object commands="">Page</object>
+			</objects>
+		</module>
+		<module name="website">
+			<objects>
+				<object commands="createWebsite">Rootfolder</object>
+				<object commands="createMenu,createTopic,createPage">Website</object>
+				<object commands="createTopic,createPage">Menu</object>
+				<object commands="createTopic,createPage">Topic</object>
+				<object commands="">Page</object>
+			</objects>
+		</module>
+		<module name="user">
+			<objects>
+				<object commands="createUser">Rootfolder</object>
+				<object commands="">User</object>
+			</objects>
+		</module>
+		<module name="media">
+			<objects>
+				<object commands="createFolder,createMedia">Rootfolder</object>
+				<object commands="createFolder,createMedia">Folder</object>
+				<object commands="">Media</object>
+			</objects>
+		</module>
+<!--
+		<module name="galleries">
+			<objects>
+				<object commands="createGallery">Rootfolder</object>
+				<object commands="">Gallery</object>
+			</objects>
+		</module>
+		<module name="news">
+			<objects>
+				<object commands="createNews">Rootfolder</object>
+				<object commands="">News</object>
+			</objects>
+		</module>
+		<module name="keywords">
+			<objects>
+				<object commands="createKeyword">Rootfolder</object>
+				<object commands="">Keyword</object>
+			</objects>
+		</module>
+		<module name="products">
+			<objects>
+				<object commands="createProduct">Rootfolder</object>
+				<object commands="">Product</object>
+			</objects>
+		</module>
+		<module name="slider">
+			<objects>
+				<object commands="createSlide">Rootfolder</object>
+				<object commands="">Slide</object>
+			</objects>
+		</module>
+-->
+		<module name="clients">
+			<objects>
+				<object commands="createClient">Rootfolder</object>
+				<object commands="">Client</object>
+			</objects>
+		</module>
+		<module name="trademarks">
+			<objects>
+				<object commands="createTrademark">Rootfolder</object>
+				<object commands="">Trademark</object>
+			</objects>
+		</module>
+		<module name="search">
+			<objects>
+				<object commands="createBrand">Rootfolder</object>
+				<object commands="createSearch">Brand</object>
+				<object commands="">Search</object>
+			</objects>
+		</module>
+
+		<module name="labels">
+			<objects>
+				<object commands="-order,-delete">Rootfolder</object>
+			</objects>
+		</module>
+		<module name="settings">
+			<objects>
+				<object commands="-order,-delete">Rootfolder</object>
+			</objects>
+		</module>
+	</user>
+
+</rights>

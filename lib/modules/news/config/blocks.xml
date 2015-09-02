@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blocks>
+	<block label="News List" id="news/list" />
+	<block label="News Detail" id="news/detail" />
+	<block label="Latest news (right)" id="news/latest" />
+</blocks>

@@ -1,0 +1,19 @@
+table#insertBlockTable
+{
+	padding:20px;
+}
+
+table#insertBlockTable tr#head td
+{
+	font-weight:bold;
+	font-size:16px;
+	border-bottom:solid 1px #ccc;
+	margin-bottom:10px;
+}
+
+table#insertBlockTable tr td select,
+table#insertBlockTable tr td button
+{
+	border:solid 1px #ccc;
+	margin:10px;
+}

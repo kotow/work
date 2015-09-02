@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template id="home">
+	<layout>
+		<header id="header"/>
+		<section id="main-section" />
+	</layout>
+	<targets>
+		<destination id="header" type="website/header" />
+		<destination id="main-section" type="free" />
+	</targets>
+</template>

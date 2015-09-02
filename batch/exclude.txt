@@ -1,0 +1,17 @@
+\apps\frontend\
+\cms\apps\backend\modules\admin\templates\
+\cms\apps\backend\modules\lists\templates\
+\cms\apps\backend\modules\media\templates\
+\cms\apps\backend\modules\news\templates\
+\cms\apps\backend\modules\user\templates\
+\cms\apps\backend\modules\website\templates\
+\cms\config\
+\cms\cache\
+\cms\log\
+\cms\batch\
+\cms\lib\model\map\
+\cms\lib\model\om\
+\cms\www\css\
+\cms\www\js\frontend\
+\cms\www\media\
+\cms\www\images\

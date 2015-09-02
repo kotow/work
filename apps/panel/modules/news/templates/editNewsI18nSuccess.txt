@@ -1,0 +1,45 @@
+<!-- START CONTENT -->
+<?php echo $sf_params->get('backendMsg'); ?>
+<?php echo panel_heading('attrLabel', $obj, 'getLabel', 'Create new', $documentName); ?>
+<form method='POST' action='<?php echo $formAction; ?>' name='editForm' id='editForm'>
+	<?php if ($moduleName && $documentName): ?>
+		<?php echo panel_hidden('moduleName', $moduleName); ?>
+		<?php echo panel_hidden('documentName', $documentName); ?>
+	<?php endif; ?>
+	<?php echo panel_hidden('id', $obj, '', 'getId'); ?>
+	<?php echo panel_hidden('parent', $sf_request->getParameter('parent')); ?>
+	<fieldset class='drop-shadow'>
+
+	<?php echo panel_input('attrLabel', $obj, array('labelname' => 'Label' , 'model' => 'NewsI18n', 'maxlength' => '255', 'required' => 'true', 'class' => 'large'), 'getLabel'); ?>
+	<?php echo panel_input('attrShortDescription', $obj, array('labelname' => 'Short description' , 'model' => 'NewsI18n', 'maxlength' => '255', 'class' => 'large'), 'getShortDescription'); ?>
+	<?php echo panel_image('attrImage', $obj, array('labelname' => 'Main picture' , 'model' => 'NewsI18n', 'allowed' => 'images'), 'getImage'); ?>
+	<?php echo panel_date('attrStartDate', $obj, array('labelname' => 'Date' , 'model' => 'NewsI18n', 'withtime' => true), 'getStartDate'); ?>
+	<?php //echo panel_date('attrEndDate', $obj, array('labelname' => 'End date' , 'model' => 'NewsI18n'), 'getEndDate'); ?>
+	<?php echo panel_culture('attrCulture', $obj, Lists::getListitemsForSelect('culture'), array('labelname' => 'Culture' , 'model' => 'NewsI18n', 'unique' => 'true', 'required' => 'true', 'class'=>'medium'), 'getCulture'); ?>
+	<?php //echo panel_select('attrType', $obj, Lists::getListitemsForSelect('news_type'), array('labelname' => 'Type' , 'model' => 'NewsI18n', 'required' => 'true', 'class'=>'medium'), 'getType'); ?>
+	<?php echo panel_textarea('attrContent', $obj, array('labelname' => 'Content' , 'model' => 'NewsI18n', 'size' => '50x10', 'richtext' => 'true', 'rows' => '10', 'class' => 'mceEditor'), 'getContent'); ?>
+	<?php echo panel_separator('hr', array('class' => 'brake')); ?>
+	
+	<?php echo panel_multi_checkbox('attrRelated', $obj, $users, array('labelname' => '<h3 style="heigh:100px">Related</h3>', 'richtext' => '1'), 'getRelated') ?>
+	<?php echo panel_separator('hr', array('class' => 'brake')); ?>
+	<?php if (count($tags)>0) { echo panel_tags($tags, $obj); echo panel_separator('hr', array('class' => 'brake')); } ?>
+
+	<?php
+		if ($obj)
+		{
+			echo panel_gallery($obj->getId(),
+			array(
+				'labelname' => 'Images gallery',
+				'width' => '600',
+				'thumb_width' => '80',
+				'path' => 'news'
+			));
+		}
+	?>
+
+	<?php echo panel_save_button(array('div' => 'buttons', 'class' => 'submit', 'value' => 'Save changes')); ?>
+	<?php echo panel_modal_images(); ?>
+	</fieldset>
+</form>
+<div class='clear'></div>
+<!-- END CONTENT -->

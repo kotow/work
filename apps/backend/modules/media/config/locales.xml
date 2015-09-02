@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locales>
+	
+	<locale label="UPLOAD_ERR_INI_SIZE">
+		<item lang="en" value="file exceeds size limit" />
+		<item lang="bg" value="документа превишава позволената големина" />
+	</locale>
+	
+	<locale label="UPLOAD_ERR_FORM_SIZE">
+		<item lang="en" value="file exceeds size limit" />
+		<item lang="bg" value="документа превишава позволената големина" />
+	</locale>
+	
+	<locale label="UPLOAD_ERR_PARTIAL">
+		<item lang="en" value="error" />
+		<item lang="bg" value="грешка" />
+	</locale>
+	
+	<locale label="UPLOAD_ERR_NO_FILE">
+		<item lang="en" value="please select a file" />
+		<item lang="bg" value="моля изберете документ" />
+	</locale>
+	
+	<locale label="UPLOAD_ERR_NO_TMP_DIR">
+		<item lang="en" value="error" />
+		<item lang="bg" value="грешка" />
+	</locale>
+	
+	<locale label="UPLOAD_ERR_CANT_WRITE">
+		<item lang="en" value="error" />
+		<item lang="bg" value="грешка" />
+	</locale>
+	
+	<locale label="UPLOAD_ERR_WRONG_FILE_TYPE">
+		<item lang="en" value="wrong file type" />
+		<item lang="bg" value="грешен тип" />
+	</locale>
+	
+	<locale label="UPLOAD_ERR_WRONG_FILE_TYPE">
+		<item lang="en" value="wrong file type" />
+		<item lang="bg" value="грешен тип" />
+	</locale>
+	
+	<locale label="upload_success">
+		<item lang="en" value="file uploaded successfully" />
+		<item lang="bg" value="документа беше качен успешно" />
+	</locale>
+	
+	<locale label="file_exists">
+		<item lang="en" value="a file with this name already exists!" />
+		<item lang="bg" value="документ с това име вече съществува" />
+	</locale>
+
+</locales>

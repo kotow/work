@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+
+	<element label="main_email" description="Main email">
+		<item lang="en" value="cto@dea-advertising.com" />
+	</element>
+	
+	<element label="telephone" description="Telephone">
+		<item lang="en" value="202 600 6000" />
+	</element>
+
+	<element label="read_more_home_button" description="read more button link on the home page">
+		<item lang="en" value="about-us.html" />
+	</element>
+
+	<element label="taxes" description="tax purcentage (must be an integer!)">
+		<item lang="en" value="0" />
+	</element>
+
+</settings>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blocks>
+	<block label="Login Box" id="user/login" />
+</blocks>

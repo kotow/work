@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects>
+	<object commands="createProduct,createCategoryI18n">Category</object>
+	<object commands="createProductI18n">Product</object>
+</objects>

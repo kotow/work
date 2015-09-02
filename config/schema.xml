@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="tm_marks" defaultIdMethod="native" noxsd="true">
+<!-- CORE MODELS -->
+	<table name="m_document" phpName="Document">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="document_model" type="varchar" size="255" />
+		<column name="document_author" type="integer" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<!--column name="publication_status" type="varchar" size="15" / -->
+	</table>
+
+	<table name="m_relation" phpName="Relation">
+		<column name="id1" type="integer" required="true" primaryKey="true" />
+		<column name="id2" type="integer" required="true" primaryKey="true" />
+		<column name="document_model1" type="varchar" size="255" />
+		<column name="document_model2" type="varchar" size="255" />
+		<column name="sort_order" type="integer" />
+	</table>
+
+	<table name="m_tag" phpName="Tag" tree="admin">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="tag_id" type="varchar" size="255" />
+		<column name="module" type="varchar" size="255" />
+		<column name="document_model" type="varchar" size="255" />
+		<column name="exclusive" type="boolean" />
+	</table>
+
+	<table name="m_tag_relation" phpName="Tagrelation">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="tag_id" type="integer" required="true" primaryKey="true" />
+	</table>
+
+	<table name="m_rootfolder" phpName="Rootfolder">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+	</table>
+
+	<table name="m_folder" phpName="Folder" tree="admin,user,media,news">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+<!-- GENERIC MODELS -->
+	<table name="m_website" phpName="Website" tree="website">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="url" type="varchar" size="255" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_website_menu" phpName="Menu" tree="website">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_website_topic" phpName="Topic" tree="website">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="navigation_title" type="varchar" size="255" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<!--table name="m_website_topic_i18n" phpName="TopicI18n">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="navigation_title" type="varchar" size="255" />
+		<column name="culture"  type="varchar" size="7" />
+	</table-->
+
+	<table name="m_website_page" phpName="Page" tree="website">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="page_type" type="varchar" size="20" />
+		<column name="navigation_title" type="varchar" size="255" />
+		<column name="meta_description" type="varchar" size="255" />
+		<column name="meta_keywords" type="varchar" size="255" />
+		<column name="image" type="integer" />
+		<column name="template" type="varchar" size="255" />
+		<column name="content" type="longvarchar" />
+		<column name="page_id" type="integer" />
+		<column name="url" type="varchar" size="255" />
+		<column name="description" type="longvarchar"/>
+		<column name="is_secure" type="boolean" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<!--table name="m_website_page_i18n" phpName="PageI18n">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="page_type" type="varchar" size="20" />
+		<column name="navigation_title" type="varchar" size="255" />
+		<column name="meta_description" type="varchar" size="255" />
+		<column name="meta_keywords" type="varchar" size="255" />
+		<column name="image" type="integer" />
+		<column name="image2" type="integer" />
+		<column name="short" type="longvarchar" />
+		<column name="template" type="varchar" size="255" />
+		<column name="content" type="longvarchar" />
+		<column name="page_id" type="integer" />
+		<column name="action_name" type="varchar" size="255" />
+		<column name="url" type="varchar" size="255" />
+		<column name="description" type="longvarchar"/>
+		<column name="description2" type="longvarchar"/>
+		<column name="is_secure" type="boolean" />
+		<column name="gallery_label" type="varchar" size="255" />
+		<column name="culture" type="varchar" size="7" />
+	</table-->
+
+	<table name="m_urlrewrite" phpName="Urlrewrite">
+		<column name="label" type="varchar" size="255" required="true"/>
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="page_id" type="integer" />
+	</table>
+
+	<table name="m_keyword" phpName="Keyword" module="keywords">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_lists" phpName="Lists" tree="lists">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="list_id" type="varchar" size="255" />
+		<column name="list_type" type="varchar" size="32" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_list_item" phpName="Listitem">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="value" type="varchar" size="255" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<!--table name="m_list_item_i18n" phpName="ListitemI18n">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="value" type="varchar" size="255" />
+		<column name="culture" type="varchar" size="7" />
+	</table-->
+
+	<table name="m_media" phpName="Media" tree="media">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="description" type="varchar" size="255" />
+		<column name="filename" type="varchar" size="255" />
+		<column name="filedirpath" type="varchar" size="255" />
+		<column name="filetype" type="varchar" size="255" />
+		<column name="filesize" type="integer" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_news" phpName="News" tree="news">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="short_description" type="varchar" size="255" />
+		<column name="image" type="integer" />
+		<column name="download" type="integer" />
+		<column name="content" type="longvarchar" />
+		<column name="start_date" type="timestamp" />
+		<column name="end_date" type="timestamp" />
+		<column name="rds" type="integer" />
+		<column name="keywords" type="varchar" size="255" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<!--table name="m_news_i18n" phpName="NewsI18n">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="short_description" type="varchar" size="255" />
+		<column name="image" type="integer" />
+		<column name="download" type="integer" />
+		<column name="content" type="longvarchar" />
+		<column name="start_date" type="timestamp" />
+		<column name="end_date" type="timestamp" />
+		<column name="culture" type="varchar" size="7" />
+	</table-->
+
+	<table name="m_newsletter" phpName="Newsletter" tree="newsletter">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="content" type="longvarchar" />
+		<column name="period" type="integer" />
+		<column name="email" type="varchar" size="255"/>
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_mailinglist" phpName="Mailinglist" tree="newsletter">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_subscriber" phpName="Subscriber" tree="newsletter">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="email" type="varchar" size="255" />
+		<column name="code" type="varchar" size="255" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_user" phpName="User" tree="user">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="login" type="varchar" size="50" />
+		<column name="backend" type="boolean" />
+		<column name="type" type="varchar" size="50" />
+		<column name="sha1_password" type="varchar" size="40" />
+		<column name="salt" type="varchar" size="32" />
+		<column name="first_name" type="varchar" size="100" />
+		<column name="last_name" type="varchar" size="100" />
+		<column name="email" type="varchar" size="100" />
+		<column name="phone" type="varchar" size="20" />
+		<column name="city" type="varchar" size="255" />
+		<column name="address" type="varchar" size="255" />
+		<column name="zip" type="varchar" size="255" />
+		<column name="state" type="varchar" size="255" />
+		<column name="address2" type="varchar" size="255" />
+		<column name="mobile_phone" type="varchar" size="255" />
+		<column name="work_phone" type="varchar" size="255" />
+		<column name="contact_name" type="varchar" size="255" />
+		<column name="contact_number" type="varchar" size="255" />
+		<column name="activation_code" type="varchar" size="255"  />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_slider" phpName="Slider" tree="slider">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_slide" phpName="Slide" tree="slider">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="image" type="integer" />
+		<column name="description" type="longvarchar" />
+		<column name="link" type="varchar" size="255" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<!--table name="m_slide_i18n" phpName="SlideI18n" tree="slider">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="image" type="integer" />
+		<column name="description" type="longvarchar" />
+		<column name="link" type="varchar" size="255" />
+		<column name="culture" type="varchar" size="7" />
+	</table-->
+
+	<table name="m_category" phpName="Category" tree="products">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="icon" type="integer" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_product" phpName="Product" tree="products">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="image" type="integer" />
+		<column name="short_description" type="varchar" size="255" />
+		<column name="description" type="longvarchar" />
+		<column name="price" type="varchar" size="15" />
+		<column name="currency" type="integer" />
+		<!--column name="type" type="varchar" size="20" />
+		<column name="sizes" type="varchar" size="255" /-->
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_gallery" phpName="Gallery" tree="galleries">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="image" type="integer" />
+		<column name="description" type="longvarchar" />
+		<column name="rds" type="integer" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_import" phpName="Import" tree="trademarks">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="system" type="integer" />
+		<column name="size" type="integer" />
+		<column name="user" type="integer" />
+		<column name="status" type="varchar" size="255"/>
+		<column name="uploaded_at" type="timestamp" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_import_session" phpName="ImportSession" tree="trademarks">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="import_id" type="integer" />
+		<column name="start_id" type="integer" />
+		<column name="tm_count" type="integer" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_client" phpName="Client" tree="clients">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="address" type="longvarchar" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_brand" phpName="Brand" tree="search">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="client_id" type="integer" />
+		<column name="application_number" type="varchar" size="255" />
+		<column name="application_date" type="timestamp" />
+		<column name="status" type="varchar" size="255" /> <!-- Pending, Registered, Rejected, Deleted? -->
+		<column name="register_number" type="varchar" size="255" />
+		<column name="registration_date" type="timestamp" />
+		<column name="kind" type="varchar" size="31" /> <!-- text,image,mixed -->
+		<column name="expires_on" type="timestamp" />
+		<column name="vienna_classes" type="varchar" size="512" />
+		<column name="colors" type="varchar" size="512" />
+		<column name="nice_classes" type="varchar" size="512" />
+		<column name="rights_owner" type="varchar" size="255" />
+		<column name="rights_owner_id" type="varchar" size="63" />
+		<column name="rights_owner_address" type="varchar" size="1024" />
+		<column name="rights_representative" type="varchar" size="255" />
+		<column name="rights_representative_id" type="varchar" size="63" />
+		<column name="rights_representative_address" type="varchar" size="1024" />
+		<column name="office_of_origin" type="varchar" size="10" /> <!-- country code: BG, EN, UK, etc... only one! -->
+		<column name="designated_contracting_party" type="varchar" size="512" /> <!-- country code: BG, EN, UK, GR, RO, etc... many! -->
+		<column name="image" type="integer" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_trademark" phpName="Trademark" tree="trademarks">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" /> <!-- Trademark -->
+		<column name="application_number" type="varchar" size="255" />
+		<column name="register_number" type="varchar" size="255" />
+		<column name="registration_date" type="timestamp" />
+		<column name="from_system" type="integer" /> <!-- WIPO - world (3), OAMI - Europe (2), BPO - Bulgaria (1)-->
+		<column name="kind" type="varchar" size="31" /> <!-- text,image,mixed -->
+		<column name="application_date" type="timestamp" />
+		<column name="status" type="varchar" size="255" /> <!-- Pending, Registered, Rejected, Deleted? -->
+		<column name="expires_on" type="timestamp" />
+		<column name="publications" type="varchar" size="1024" /> <!-- seriazlized array - table format -->
+		<column name="vienna_classes" type="varchar" size="512" />
+		<column name="colors" type="varchar" size="512" />
+		<column name="nice_classes" type="varchar" size="512" />
+		<column name="rights_owner" type="varchar" size="255" />
+		<column name="rights_owner_id" type="varchar" size="63" />
+		<column name="rights_owner_address" type="varchar" size="1024" />
+		<column name="rights_representative" type="varchar" size="255" />
+		<column name="rights_representative_id" type="varchar" size="63" />
+		<column name="rights_representative_address" type="varchar" size="1024" />
+		<column name="office_of_origin" type="varchar" size="10" /> <!-- country code: BG, EN, UK, etc... only one! -->
+		<column name="designated_contracting_party" type="varchar" size="512" /> <!-- country code: BG, EN, UK, GR, RO, etc... many! -->
+		<column name="image" type="integer" />
+		<column name="contestation" type="timestamp" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_search" phpName="Search" tree="search">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" /> <!-- Trademark -->
+		<column name="application_number" type="varchar" size="255" />
+		<column name="register_number" type="varchar" size="255" />
+		<column name="registration_date" type="varchar" size="12" />
+		<column name="application_date" type="varchar" size="12" />
+		<column name="expires_on" type="varchar" size="12" />
+		<column name="vienna_classes" type="varchar" size="512" />
+		<column name="nice_classes" type="varchar" size="512" />
+		<column name="rights_owner" type="varchar" size="1024" />
+		<column name="rights_representative" type="varchar" size="1024" />
+		<column name="office_of_origin" type="varchar" size="10" /> <!-- country code: BG, EN, UK, etc... only one! -->
+		<column name="designated_contracting_party" type="varchar" size="512" /> <!-- country code: BG, EN, UK, GR, Ro, etc... many! -->
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+	<table name="m_search_match" phpName="SearchMatch" tree="search">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="import_session" type="integer" />
+		<column name="search" type="integer" />
+		<column name="trademark" type="integer" />
+		<column name="matches" type="varchar" size="1024" />
+		<!-- generic fields -->
+		<column name="created_at" type="timestamp" />
+		<column name="updated_at" type="timestamp" />
+		<column name="publication_status" type="varchar" size="15" />
+	</table>
+
+</database>

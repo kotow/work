@@ -1,0 +1,1349 @@
+<?php
+/**
+ * Subclass for representing a row from the 'm_document' table.
+ *
+ *
+ *
+ * @package lib.model
+ */
+class Document extends BaseDocument
+{
+
+	// ========================================================= BaseDocument Functions =========================================================
+
+	public function delete($con = null)
+	{
+		$originalCacheRelations = sfConfig::get('sf_cache_relations');
+		sfConfig::set('sf_cache_relations', false);
+
+		try
+		{
+			$docId = $this->getId();
+			$con = Propel::getConnection();
+			$con->begin();
+
+			// delete child relation
+			$c = new Criteria();
+			$c->add(RelationPeer::ID2, $docId);
+			$relations = RelationPeer::doSelect($c);
+			foreach ($relations as $relation)
+			{
+				$relation->delete(null, sfConfig::get('sf_cache_relations'));
+				//$relation->delete();
+			}
+
+			// delete parent relations
+			$children = Document::getChildrenOf($docId);
+			foreach ($children as $child)
+			{
+				$relation = new Relation;
+				$relation->setId1($docId);
+				$relation->setId2($child->getId());
+				$child->delete();
+				$relation->delete();
+			}
+
+			// delete any tags for this document
+			$c = new Criteria();
+			$c->add(TagrelationPeer::ID, $docId);
+			$tagRelations = TagrelationPeer::doSelect($c);
+			foreach ($tagRelations as $tag)
+			{
+				$tag->delete();
+			}
+
+			parent::delete();
+
+			$con->commit();
+		}
+		catch (Exception $e)
+		{
+			$con->rollback();
+			throw $e;
+		}
+
+		// set 'sf_cache_relations' it's original value
+		sfConfig::set('sf_cache_relations', $originalCacheRelations);
+		if ($originalCacheRelations)
+		{
+			Relation::updateRelationCache();
+		}
+		return true;
+	}
+
+	// ========================================================= Status Functions =========================================================
+
+	public static function setStatus(&$doc, $status)
+	{
+		if (!$status) return false;
+		$document = null;
+		if (is_numeric($doc))
+		{
+			$document = Document::getDocumentInstance($doc);
+		}
+		if (is_object($doc))
+		{
+			$document = $doc;
+		}
+		if (!$document) return false;
+		if (method_exists($document, 'setPublicationStatus'))
+		{
+			$document->setPublicationStatus($status);
+			if (is_object($doc))
+			{
+				// return status back to passed object
+				$doc = $document;
+			}
+			return $document->save();
+		}
+		return false;
+	}
+
+	public static function getStatus($doc)
+	{
+		$document = null;
+		if (is_numeric($doc))
+		{
+			$document = Document::getDocumentInstance($doc);
+		}
+		if (is_object($doc))
+		{
+			$document = $doc;
+		}
+		if (!$document) return false;
+		if (method_exists($document, 'getPublicationStatus'))
+		{
+			return $document->getPublicationStatus();
+		}
+		return UtilsHelper::STATUS_ACTIVE;
+	}
+
+	// ========================================================= Index Functions =========================================================
+
+	public static function saveSearchIndex()
+	{
+		$index = new Zend_Search_Lucene(sfConfig::get('sf_lib_dir').'/modules/search/tmp/lucene.user.index',true);
+
+		$doc = new Zend_Search_Lucene_Document();
+		$doc->addField(Zend_Search_Lucene_Field::Keyword('id', $this->pageDocument->getId()));
+		$doc->addField(Zend_Search_Lucene_Field::Keyword('pageid', $this->pageDocument->getId()));
+		$doc->addField(Zend_Search_Lucene_Field::Keyword('title', $this->pageDocument->getNavigationTitle()));
+		$blobData = $this->pageDocument->getContent();
+		// $blockContents = $blobData->__toString();
+		$blockContents = $blobData;
+		$doc->addField(Zend_Search_Lucene_Field::Unstored('contents', $blockContents.' '.$this->pageDocument->getNavigationTitle()));
+
+		$index->addDocument($doc);
+		$index->commit();
+
+		$hits = $index->find(strtolower('maquette'));
+		foreach ($hits as $hit)
+		{
+//			echo $hit->score.'<br/>';
+//			echo $hit->id;
+//			echo $hit->contents.'<br/>';
+			echo $hit->pageid;
+		}
+	}
+
+	// ========================================================= Document Functions =========================================================
+
+	public static function checkOwner($docId)
+	{
+		$context = sfContext::getInstance();
+		$user = $context->getUser();
+		$owner = $user->getSubscriber();
+
+		if ($owner)
+		{
+			if ($owner->getType() != "admin")
+			{
+				$genDoc = Document::getGenericDocument($docId);
+				if ($genDoc->getDocumentAuthor() != $owner->getId()) return false;
+			}
+		}
+
+		return true;
+	}
+
+	public static function getGenericDocument($document)
+	{
+		try
+		{
+			if (is_numeric($document))
+			{
+				$genericDocument = DocumentPeer::retrieveByPk($document);
+			}
+			elseif (is_object($document) && is_numeric($document->getId()))
+			{
+				$genericDocument = DocumentPeer::retrieveByPk($document->getId());
+			}
+			elseif (is_object($document))
+			{
+				$genericDocument = new Document();
+				$genericDocument->setDocumentModel(get_class($document));
+//				$genericDocument->setLabel($document->getLabel());
+				$subscriber = sfContext::getInstance()->getUser()->getAttributeHolder()->getAll('subscriber');
+				isset($subscriber['subscriber_id']) ? $author = $subscriber['subscriber_id'] : $author = 0;
+				$genericDocument->setDocumentAuthor($author);
+//				$genericDocument->setPublicationStatus('ACTIVE');
+				$genericDocument->save();
+
+				if (method_exists($document, 'getPublicationStatus'))
+				{
+					if (!$document->getPublicationStatus())
+						$document->setPublicationStatus('ACTIVE');
+				}
+			}
+
+			return $genericDocument;
+		}
+		catch (Exception $e)
+		{
+			throw $e;
+		}
+	}
+
+	public static function deleteDocument($id)
+	{
+		$con = Propel::getConnection(DocumentPeer::DATABASE_NAME);
+		$stmt = $con->createStatement();
+		$children = $medias = array();
+
+		$medias = Document::getChildrenOf($id, "Media");
+		if($medias)
+		{
+			foreach ($medias as $media)
+			{
+				$media->delete();
+			}
+		}
+
+		$children = Document::getChildrenOf($id, null, false);
+		$sql = "DELETE FROM m_document WHERE m_document.id = $id";
+		$stmt->executeQuery($sql);
+		Document::deleteObjCache($id);
+
+		foreach ($children as $child)
+		{
+			self::deleteDocument($child);
+		}
+	}
+
+	public static function getDocumentInstance($id)
+	{
+
+		if (self::isCached($id))
+		{
+			return self::getCachedObj($id);
+		}
+		else
+		{
+
+			try
+			{
+				$genericDocument = DocumentPeer::retrieveByPk($id);
+
+				if (!$genericDocument)
+				{
+					return null;
+				}
+				$model = $genericDocument->getDocumentModel();
+				//echo "NOT CACHED ".$model;
+				$classPeer = $model.'Peer';
+
+				$c = new Criteria();
+				$c->add(constant($classPeer . '::ID'), $id);
+				$document = call_user_func(array($classPeer, 'doSelectOne'),$c);
+				return $document;
+			}
+			catch (Exception $e)
+			{
+				throw $e;
+			}
+		}
+	}
+
+	// ========================================================= Cache Functions =========================================================
+
+	public static function getCachePath($id, $create=false)
+	{
+		$firstLevelFolder = intval($id/10000);
+		$secondLevelFolder = intval(($id-($firstLevelFolder*10000))/100);
+		$path = sfConfig::get('sf_root_dir')."/cache/objcache/".$firstLevelFolder."/";
+		if ($create)
+		{
+			if (!is_dir($path))
+			{
+				mkdir($path);
+			}
+			@chmod($path, 0777);
+		}
+		$path = $path.$secondLevelFolder."/";
+		if ($create)
+		{
+			if (!is_dir($path))
+			{
+				mkdir($path);
+			}
+			@chmod($path, 0777);
+		}
+		return $path;
+	}
+
+	public static function deleteObjCache($document)
+	{
+		if (sfConfig::get('sf_cache_trees'))
+		{
+
+			if(!is_object($document)) $document = Document::getDocumentInstance($document);
+
+			include_once sfConfig::get('sf_root_dir')."/config/"."/Schema.class.php";
+
+			$documentModel = get_class($document);
+			$getTree = "get".$documentModel."Trees";
+			$trees = Schema::$getTree();
+			foreach ($trees as $module)
+			{
+				$module = strtolower($module);
+				BackendService::updateTree($module, $document, "DELETE");
+				BackendService::updateTree($module, $document, "DELETE", "mce");
+			}
+		}
+		if (sfConfig::get('sf_cache_objects'))
+		{
+			if(is_object($document)) $document = $document->getid();
+
+			$cachefile = self::getCachePath($document)."doc".$document.".php";
+			if (file_exists($cachefile))
+			{
+				unlink($cachefile);
+				return true;
+			}
+
+			return false;
+		}
+	}
+
+	public static function cacheObj($document, $documentModel = null, $refreshTree = true, $parentId = null)
+	{
+		if (sfConfig::get('sf_cache_objects'))
+		{
+			// parse cachedObjects and cache objects
+			$objects = XMLParser::getXMLdataValues(sfConfig::get('sf_root_dir')."/config/cachedObjects.xml");
+			// check if documentModel is Cached
+			$foundModel = false;
+
+			if (is_null($documentModel))
+			{
+				$documentModel = get_class($document);
+			}
+
+			foreach ($objects as $obj)
+			{
+				if (($obj['tag'] == 'OBJECT') && ($obj['type'] == 'complete'))
+				{
+					if ($documentModel == $obj['value'])
+					{
+						$foundModel = true;
+					}
+				}
+			}
+
+			// Caching Object if it's model is in "cachedObjects.xml" file
+			if ($foundModel)
+			{
+				$docId = $document->getId();
+				$path = self::getCachePath($docId, true);
+
+				include_once sfConfig::get('sf_root_dir')."/config/"."/Schema.class.php";
+
+				$m = "get".$documentModel."Properties";
+				$properties = Schema::$m();
+
+				$content = "<?php\nclass CachedObj".$docId."\n{\n";
+				$content .= "\tpublic function __getDocumentModel(){\n\t\treturn \"".$documentModel."\";\n\t}\n";
+				foreach ($properties as $getProperty)
+				{
+					$getter = "get".ucfirst($getProperty);
+					$v = $document->{$getter}();
+					if (is_null($v))
+					{
+						$content .= "\tpublic function ".$getter."(){\n\t\treturn NULL;\n\t}\n";
+					}
+					else
+					//					if (is_string($v))
+					{
+						if ($documentModel == "Page" && $getProperty == "Content")
+						{
+							$content .= "\tpublic function ".$getter."(){\n\t\treturn \"".str_replace(array('\\','"'), array('\\\\','\"'), $v)."\";\n\t}\n";
+						}
+						else
+						{
+							// delete <script> tags !!!
+							$v = preg_replace('@(<[ \\n\\r\\t]*script(>|[^>]*>))@i', '', $v);
+							$v = preg_replace('@(<[ \\n\\r\\t]*/[ \\n\\r\\t]*script(>|[^>]*>))@i', '', $v);
+							$content .= "\tpublic function ".$getter."(){\n\t\treturn \"".str_replace(array('\\','"'), array('\\\\','\"'), $v)."\";\n\t}\n";
+						}
+					}
+					/*					else
+					{
+					$content .= "\tpublic function ".$getter."(){\n\t\treturn ".$v.";\n\t}\n";
+					}*/
+				}
+				if (!$parentId)
+					$parentId = intval(self::getParentOf($docId, null, false, false));
+				$content .= "\tpublic function getParent(){\n\t\treturn $parentId;\n\t}\n";
+				$content .= "}";
+
+				$cachefile = $path."doc".$docId.".php";
+				if (file_exists($cachefile))
+				{
+					unlink($cachefile);
+				}
+
+				FileHelper::writeFile($cachefile, $content);
+				chmod($cachefile, 0777);
+			}
+		}
+
+		// Refreshing Tree - not related to CacheObject !!!
+		if (sfConfig::get('sf_cache_trees') && $refreshTree)
+		{
+			/*
+			$modules = FileHelper::getSubElements(sfConfig::get('sf_root_dir')."/apps/backend/modules", "folder");
+			foreach ($modules as $module => $path)
+			*/
+			include_once sfConfig::get('sf_root_dir')."/config/"."/Schema.class.php";
+
+			$documentModel = get_class($document);
+			$getTree = "get".$documentModel."Trees";
+			$trees = Schema::$getTree();
+			foreach ($trees as $module)
+			{
+				$module = strtolower($module);
+				// Caching Left, Right and MCE tree
+				BackendService::updateTree($module, $document, "UPDATE");
+				//BackendService::updateTree($module, $document, "UPDATE", "right");
+				BackendService::updateTree($module, $document, "UPDATE", "mce");
+			}
+		}
+	}
+
+	public static function getCachedObj($id)
+	{
+		$objclass = "CachedObj".$id;
+		if (!class_exists($objclass))
+		{
+			include self::getCachePath($id)."doc".$id.".php";
+		}
+
+		$cahedObj = new $objclass();
+		$documentModel = $cahedObj->__getDocumentModel();
+		$newObj = new $documentModel;
+
+		include_once sfConfig::get('sf_root_dir')."/config/Schema.class.php";
+
+		$m = "get".$documentModel."Properties";
+		$properties = Schema::$m();
+
+		foreach ($properties as $property)
+		{
+			$getter = "get".$property;
+			$v = $cahedObj->{$getter}();
+
+			$setter = "set".$property;
+			$newObj->{$setter}($v);
+		}
+
+		$newObj->setNew(false);
+		$newObj->resetModified();
+		return $newObj;
+	}
+
+	public static function isCached($id)
+	{
+		if (is_readable(self::getCachePath($id)."doc".$id.".php"))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	// ========================================================= Relations Functions =========================================================
+
+	public static function getChildrenOf($parentId, $model = null, $createInstance = true, $useCache = true, $order = false)
+	{
+		$children = array();
+		try
+		{
+			if ($useCache && BackendService::loadChildrenRelations())
+			{
+				$relations = array();
+				if ($model)
+				{
+					if (array_key_exists($parentId, $_SESSION['childrenRelations']))
+					{
+						if (array_key_exists($model, $_SESSION['childrenRelations'][$parentId]))
+						{
+							$items = $_SESSION['childrenRelations'][$parentId][$model];
+							if (is_array($items))
+							{
+								$relations = array_merge($relations, $items);
+							}
+						}
+					}
+				}
+				else
+				{
+					if (array_key_exists($parentId, $_SESSION['childrenRelations']))
+					{
+						$itemsArr = $_SESSION['childrenRelations'][$parentId];
+						if (is_array($itemsArr))
+						{
+							foreach ($itemsArr as $items)
+							{
+								$relations = array_merge($relations, $items);
+							}
+						}
+					}
+				}
+				$are_objects = false;
+			}
+			else
+			{
+				$c = new Criteria();
+				$c->add(RelationPeer::ID1, $parentId);
+				if ($model)
+				{
+					$c->add(RelationPeer::DOCUMENT_MODEL2, $model);
+				}
+
+				if($order && $model)
+				{
+					$c->addJoin("m_".strtolower($model).".ID", RelationPeer::ID2, Criteria::LEFT_JOIN);
+					$c->addAscendingOrderByColumn($order);
+					$relations = call_user_func(array($model."Peer", 'doSelect'), $c);
+					$are_objects = false;
+				}
+				else
+				{
+					$c->addAscendingOrderByColumn(RelationPeer::SORT_ORDER);
+					$relations = RelationPeer::doSelect($c, null);
+					$are_objects = true;
+				}
+			}
+
+			if ($createInstance && !$order)
+			{
+				if ($are_objects)
+				{
+					foreach ($relations as $relation)
+					{
+						$children[] = self::getDocumentInstance($relation->getId2());
+					}
+				}
+				else
+				{
+					foreach ($relations as $relation)
+					{
+						$children[] = self::getDocumentInstance($relation);
+					}
+				}
+			}
+			else
+			{
+				if ($are_objects)
+				{
+					foreach ($relations as $relation)
+					{
+						$children[] = $relation->getId2();
+					}
+				}
+				else
+				{
+					$children = $relations;
+				}
+			}
+
+			return $children;
+		}
+		catch (Exception $e)
+		{
+			throw $e;
+		}
+	}
+
+/*	public static function getChildrenOfByCulture($parentId, $model = null, $createInstance = true, $culture = null, $strict = false)
+	{
+		$children = array();
+
+		if (is_null($culture))
+		{
+			$culture = sfContext::getInstance()->getUser()->getCulture();
+		}
+
+		try
+		{
+			$nonI18nChildren = Document::getChildrenOf($parentId, $model, true);
+
+			foreach ($nonI18nChildren as $item)
+			{
+				if(SF_APP == "frontend")
+				{
+					$gdoc = Document::getGenericDocument($item);
+					if($gdoc && $gdoc->getPublicationStatus() != UtilsHelper::STATUS_ACTIVE ) continue;
+				}
+				$child = self::getDocumentByCulture($item, $culture, $strict);
+				$childId = $child->getId();
+
+				if ($createInstance)
+				{
+					$children[$childId] = $child;
+				}
+				else
+				{
+					$children[$childId] = $childId;
+				}
+			}
+
+			return $children;
+		}
+		catch (Exception $e)
+		{
+			throw $e;
+		}
+	}*/
+
+	public static function getFirstChildOf($parentId, $model = null)
+	{
+		try
+		{
+			$c = new Criteria();
+			$c->add(RelationPeer::ID1, $parentId);
+			if ($model)
+			{
+				$c->add(RelationPeer::DOCUMENT_MODEL2, $model);
+			}
+			$relation = RelationPeer::doSelectOne($c);
+			if ($relation)
+			{
+				return self::getDocumentInstance($relation->getId2());
+			}
+			else
+			{
+				return null;
+			}
+		}
+		catch (Exception $e)
+		{
+			throw $e;
+		}
+	}
+
+	public static function hasChildren($id)
+	{
+		if (!$id)
+		{
+			return false;
+		}
+
+		if (BackendService::loadChildrenRelations())
+		{
+			if( isset($_SESSION['childrenRelations'][$id]) )
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			try
+			{
+				$c = new Criteria();
+				$c->add(RelationPeer::ID1, $id);
+				$child = RelationPeer::doSelectOne($c);
+				if ($child)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			catch (Exception $e)
+			{
+				throw $e;
+			}
+		}
+	}
+
+/*	public static function hasI18nChildrenOnly($id)
+	{
+		if (!$id)
+		{
+			return false;
+		}
+
+		if (BackendService::loadChildrenRelations())
+		{
+			if( isset($_SESSION['childrenRelations'][$id]) )
+			{
+				$model = '';
+				foreach ($_SESSION['childrenRelations'][$id] as $model => $v)
+				{
+					if (strpos($model, 'I18n') == false)
+						return false;
+				}
+				if ($model)
+					return true;
+				else
+					return false;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			try
+			{
+				$c = new Criteria();
+				$c->addSelectColumn(RelationPeer::DOCUMENT_MODEL2);
+				$c->add(RelationPeer::ID1, $id);
+				$c->setDistinct();
+				$rs = RelationPeer::doSelectRS($c);
+				$model = '';
+				while ($rs->next())
+				{
+					$model = $rs->getString(1);
+					if (strpos($model, 'I18n') == false)
+						return false;
+				}
+				if ($model)
+					return true;
+				else
+					return false;
+			}
+			catch (Exception $e)
+			{
+				throw $e;
+			}
+		}
+	}*/
+
+	public static function isChildOf($parentId, $childId)
+	{
+		if ($parentId == $childId)
+		{
+			return true;
+		}
+		if (BackendService::loadChildrenRelations())
+		{
+			if( isset($_SESSION['childrenRelations'][$parentId]) )
+			{
+				$parentItems = $_SESSION['childrenRelations'][$parentId];
+				foreach ($parentItems as $model => $items)
+				{
+					if (in_array($childId, $items))
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			$parent = self::getParentOf($childId, null, false);
+			while ($parent)
+			{
+				if ($parent == $parentId)
+				{
+					return true;
+				}
+				$parent = self::getParentOf($parent, null, false);
+			}
+		}
+		return false;
+	}
+
+	public static function getParentOf($id, $model = null, $createInstance = true, $useCache = true)
+	{
+		$parent = $parentId = null;
+		try
+		{
+			$found = false; $load = true;
+			if ($useCache)
+			{
+				$objclass = "CachedObj".$id;
+				if (!class_exists($objclass))
+				{
+					$cacheFile = self::getCachePath($id)."doc".$id.".php";
+					if (is_readable($cacheFile))
+						include self::getCachePath($id)."doc".$id.".php";
+					else
+						$load = false;
+				}
+
+				if ($load)
+				{
+					$cachedObj = new $objclass();
+					if (method_exists($cachedObj, 'getParent'))
+					{
+						$parentId = $cachedObj->getParent();
+						$found = true;
+					}
+				}
+			}
+			if (!$found)
+			{
+				$c = new Criteria();
+				$c->add(RelationPeer::ID2, $id);
+				if ($model)
+				{
+					$c->add(RelationPeer::DOCUMENT_MODEL1, $model);
+				}
+				$parent = RelationPeer::doSelectOne($c);
+				if ($parent)
+				{
+					$parentId = $parent->getId1();
+				}
+			}
+
+			if ($parentId)
+			{
+				if ($createInstance)
+				{
+					$parent = self::getDocumentInstance($parentId);
+				}
+				else
+				{
+					$parent = $parentId;
+				}
+			}
+
+			return $parent;
+		}
+		catch (Exception $e)
+		{
+			throw $e;
+		}
+	}
+
+	// BUGGED
+/*	public static function getParentFromI18n($id, $model = null, $createInstance = true)
+	{
+		if (substr(get_class((Document::getDocumentInstance($id))), -4) == 'I18n')
+		{
+			$i18nDoc = true;
+		}
+		try
+		{
+			$c = new Criteria();
+			$c->add(RelationPeer::ID2, $id);
+			if ($model)
+			{
+				$c->add(RelationPeer::DOCUMENT_MODEL1, $model);
+			}
+			$parent = RelationPeer::doSelectOne($c)->getId1();
+			if ($parent)
+			{
+				if ($i18nDoc)
+				{
+					$parent = self::getParentOf($parent);
+				}
+			}
+			if ($parent)
+			{
+				if ($createInstance)
+				{
+					$parent = self::getDocumentInstance($parent);
+				}
+				else
+				{
+					$parent = $parent;
+				}
+			}
+
+			return $parent;
+		}
+		catch (Exception $e)
+		{
+			throw $e;
+		}
+	}*/
+
+/*	public static function hasParent($id)
+	{
+		try
+		{
+			$c = new Criteria();
+			$c->add(RelationPeer::ID2, $id);
+			$parent = RelationPeer::doSelectOne($c);
+
+			if ($parent)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		catch (Exception $e)
+		{
+			throw $e;
+		}
+	}*/
+
+	// ============================================================ TAGs functions ============================================================
+
+	public static function getAvailableTagsOf($module, $documentModel)
+	{
+		$tags = array();
+		try
+		{
+			$c = new Criteria();
+			$c->add(TagPeer::MODULE, $module);
+			$c->add(TagPeer::DOCUMENT_MODEL, $documentModel);
+			$tags = TagPeer::doSelect($c);
+
+			return $tags;
+		}
+		catch (Exception $e)
+		{
+			throw $e;
+		}
+	}
+
+	public static function hasTag($document, $tagId)
+	{
+		if (!$document)
+		{
+			return false;
+		}
+		try
+		{
+			if(is_object($document))
+			{
+				$docId = $document->getId();
+			}
+			else
+			{
+				$docId = $document;
+			}
+
+			$hasTag = false;
+
+			if (BackendService::loadTagsRelations())
+			{
+				if (array_key_exists('tagsRelations', $_SESSION) && array_key_exists($tagId, $_SESSION['tagsRelations']))
+				{
+					if(in_array($docId, $_SESSION['tagsRelations'][$tagId])) $hasTag = true;
+				}
+
+			}
+			else
+			{
+				$c = new Criteria();
+				$c->add(TagPeer::TAG_ID, $tagId);
+				$tag = TagPeer::doSelectOne($c);
+
+				if($tag)
+				{
+					$c = new Criteria();
+					$c->add(TagrelationPeer::ID, $docId);
+					$c->add(TagrelationPeer::TAG_ID, $tag->getId());
+					$hasTag = TagrelationPeer::doSelectOne($c);
+				}
+			}
+
+			if (isset($hasTag) && $hasTag)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		catch (Exception $e)
+		{
+			throw $e;
+		}
+	}
+
+	public static function getTagsOfDocument($document)
+	{
+		if (!$document)
+		{
+			return null;
+		}
+		return self::getTagsOfDocumentById($document->getId());
+	}
+
+	public static function getTagsOfDocumentById($documentId)
+	{
+		if (!$documentId)
+		{
+			return null;
+		}
+		try
+		{
+			$c = new Criteria();
+			$c->add(TagrelationPeer::ID, $documentId);
+			$tagRelations = TagrelationPeer::doSelect($c);
+
+			$tagIDs = array();
+			foreach ($tagRelations as $tagRel)
+			{
+				$tagIDs[] = $tagRel->getTagid();
+			}
+			if (!empty($tagIDs))
+			{
+				$c = new Criteria();
+				$c->add(TagPeer::ID, $tagIDs, Criteria::IN);
+				$tags = TagPeer::doSelect($c);
+			}
+
+			return $tags;
+		}
+		catch (Exception $e)
+		{
+			throw $e;
+		}
+	}
+
+	public static function addTag($document, $tagId, $updateCache = true, $move = true)
+	{
+		try
+		{
+			$c = new Criteria();
+			$c->add(TagPeer::TAG_ID, $tagId);
+			$tag = TagPeer::doSelectOne($c);
+
+			if ($tag->getExclusive())
+			{
+				$c = new Criteria();
+				$c->add(TagrelationPeer::TAG_ID, $tag->getId());
+				$tagRelation = TagrelationPeer::doSelectOne($c);
+				if ($tagRelation)
+				{
+					$tagRelation->delete();
+				}
+			}
+
+			$tagRelation = TagrelationPeer::retrieveByPk($document->getId(), $tag->getId());
+			if (!$tagRelation)
+			{
+				$tagRelation = new Tagrelation();
+				$tagRelation->setId($document->getId());
+				$tagRelation->setTagId($tag->getId());
+				$tagRelation->save();
+			}
+			if ($updateCache)
+			{
+				Tagrelation::updateTagRelationCache();
+			}
+		}
+		catch (Exception $e)
+		{
+			throw $e;
+		}
+	}
+
+	public static function removeTag($document, $tagId, $updateCache = true)
+	{
+		try
+		{
+			$c = new Criteria();
+			$c->add(TagPeer::TAG_ID, $tagId);
+			$tag = TagPeer::doSelectOne($c);
+
+			$tagRelation = TagrelationPeer::retrieveByPk($document->getId(), $tag->getId());
+			if ($tagRelation)
+			{
+				$tagRelation->delete();
+				if ($updateCache)
+				{
+					Tagrelation::updateTagRelationCache();
+				}
+			}
+		}
+		catch (Exception $e)
+		{
+			throw $e;
+		}
+	}
+
+	public static function getDocumentByExclusiveTag($tagId)
+	{
+		$docId = false;
+		try
+		{
+			if (BackendService::loadTagsRelations())
+			{
+				if ($_SESSION && array_key_exists('tagsRelations', $_SESSION) && array_key_exists($tagId, $_SESSION['tagsRelations']))
+				{
+					$docId = $_SESSION['tagsRelations'][$tagId][0];
+				}
+			}
+			else
+			{
+				$c = new Criteria();
+				$c->add(TagPeer::TAG_ID, $tagId);
+				$tag = TagPeer::doSelectOne($c);
+
+				if ($tag)
+				{
+					$c = new Criteria();
+					$c->add(TagrelationPeer::TAG_ID, $tag->getId());
+					$tagRelation = TagrelationPeer::doSelectOne($c);
+					if ($tagRelation) $docId = $tagRelation->getId();
+				}
+			}
+
+			if ($docId)
+			{
+				$document = self::getDocumentInstance($docId);
+				return $document;
+			}
+			else
+			{
+				FileHelper::Log("Missing exclusive tag: $tagId", UtilsHelper::MSG_ERROR );
+/*				if(substr($tagId, 0, 12) == "website_page" && $tagId != "website_page_404")
+				{
+					sfContext::getInstance()->getController()->forward(sfConfig::get('sf_error_404_module'), sfConfig::get('sf_error_404_action'));
+				}*/
+				return null;
+			}
+		}
+		catch (Exception $e)
+		{
+			return null;
+		}
+	}
+
+	public static function getDocumentsByTag($tagId)
+	{
+		try
+		{
+			if (BackendService::loadTagsRelations())
+			{
+				if (array_key_exists('tagsRelations', $_SESSION) && array_key_exists($tagId, $_SESSION['tagsRelations']))
+				{
+					$docs = $_SESSION['tagsRelations'][$tagId];
+				}
+
+				foreach ($docs as $docId)
+				{
+					$document = self::getDocumentInstance($docId);
+					if ($document)
+					{
+						$documents[] = $document;
+					}
+				}
+			}
+			else
+			{
+				$c = new Criteria();
+				$c->add(TagPeer::TAG_ID, $tagId);
+				$tag = TagPeer::doSelectOne($c);
+				if (!$tag)
+				{
+					return null;
+				}
+				$c = new Criteria();
+				$c->add(TagrelationPeer::TAG_ID, $tag->getId());
+				$tagRelations = TagrelationPeer::doSelect($c);
+				$documents = array();
+				foreach ($tagRelations as $tagRelation)
+				{
+					$document = self::getDocumentInstance($tagRelation->getId());
+					if ($document)
+					{
+						$documents[] = $document;
+					}
+				}
+			}
+			return $documents;
+		}
+		catch (Exception $e)
+		{
+			return null;
+		}
+	}
+
+	// ============================================================ INDEX functions ============================================================
+
+	public static function indexDocument($id)
+	{
+		ini_set("memory_limit","2048M");
+		try
+		{
+			$search_config_file = SF_ROOT_DIR.'/config/search.xml';
+			$documents = simplexml_load_file($search_config_file);
+			$document_instance = Document::getDocumentInstance($id);
+			$document_name = get_class($document_instance);
+			$search_index_path = SF_ROOT_DIR.'/cache/search/'.strtolower($document_name);
+			$search_index = Zend_Search_Lucene::open($search_index_path);
+			$common_field_val = "";
+			$search_doc = new Zend_Search_Lucene_Document();
+			$genDoc = Document::getGenericDocument($id);
+			if ($genDoc) $date = $genDoc->getCreatedAt();
+
+			foreach ($documents as $document)
+			{
+				$docClass = $document->attributes();
+				if($document_name == $docClass)
+				{
+					$search_doc->addField(Zend_Search_Lucene_Field::Keyword('document_id', $id,'utf-8'));
+					$search_doc->addField(Zend_Search_Lucene_Field::Keyword('document_date', $date,'utf-8'));
+					$search_doc->addField(Zend_Search_Lucene_Field::Text('document_label', $document_instance->getLabel(),'utf-8'));
+					$search_doc->addField(Zend_Search_Lucene_Field::Keyword('document_type', $document_name,'utf-8'));
+/*					if(substr($document_name, -4) == "I18n")
+					{
+						$search_doc->addField(Zend_Search_Lucene_Field::Keyword('Culture', $document_instance->getCulture(), 'utf-8'));
+					}*/
+
+					foreach ($document as $field_name)
+					{
+						$attr = get_object_vars($field_name);
+						$attributes = $attr['@attributes'];
+						$getFunction = 'get'.$attributes['name'];
+						$fieldContent = "";
+
+						if($attributes['linked'])
+						{
+							$getFunctionLinked = 'get'.$attributes['linked'];
+							$linkedObj = Document::getDocumentInstance($document_instance->$getFunction());
+							if($linkedObj) $fieldContent = $linkedObj->$getFunctionLinked();
+						}
+						else
+						{
+							$fieldContent = $document_instance->$getFunction();
+						}
+
+						$search_doc->addField(Zend_Search_Lucene_Field::Text($attributes['name'], $fieldContent, 'utf-8'));
+					}
+
+					$search_index->addDocument($search_doc);
+					$search_index->commit();
+					//$search_index->optimize();
+				}
+			}
+
+		}
+		catch (Exception $e)
+		{
+			FileHelper::Log("INDEXING > Error wile adding document ".$id." | ".$e->getMessage(), UtilsHelper::MSG_ERROR );
+			throw $e;
+		}
+
+		/*
+		try
+		{
+		$doc = Document::getDocumentInstance($id);
+		$docClass = get_class($doc);
+
+		$search_config_file = sfConfig::get('sf_root_dir').'/config/search.xml';
+		$documents = simplexml_load_file($search_config_file);
+
+		$index_path = sfConfig::get('sf_root_dir').'/cache/search/'.strtolower($docClass);
+		$search_index = Zend_Search_Lucene::open($index_path);
+
+		//if($doc && ($doc->getPublicationStatus() == UtilsHelper::STATUS_ACTIVE) && ($docClass == "User" && in_array($docFrontType, $userArr)))
+		{
+		foreach ($documents as $document)
+		{
+		$document_name = $document->attributes();
+		if($document_name == $docClass)
+		{
+		$common_field_val = null;
+		$profile = $profiles[$docFrontType];
+		$search_doc = new Zend_Search_Lucene_Document();
+		$search_doc->addField(Zend_Search_Lucene_Field::Keyword('document_id', $id,'utf-8'));
+		$search_doc->addField(Zend_Search_Lucene_Field::Keyword('document_label', $doc->getLabel(),'utf-8'));
+		$search_doc->addField(Zend_Search_Lucene_Field::Keyword('document_type', $document_name,'utf-8'));
+		$search_doc->addField(Zend_Search_Lucene_Field::Text('Description', $doc->getDescription(), 'utf-8'));
+		$search_doc->addField(Zend_Search_Lucene_Field::Keyword('document_url', ""));
+
+		foreach ($document as $field_name)
+		{
+		$attr = get_object_vars($field_name);
+		$attributes = $attr['@attributes'];
+		$getFunction = 'get'.$attributes['name'];
+		$fieldContent = null;
+
+		if($attributes['linked'])
+		{
+		$getFunctionLinked = 'get'.$attributes['linked'];
+		$linkedObj = self::getDocumentInstance($doc->$getFunction());
+		if($linkedObj) $fieldContent = $linkedObj->$getFunctionLinked();
+		}
+		else
+		{
+		$fieldContent = $doc->$getFunction();
+		}
+
+		if($attributes['setTo'])
+		{
+		$common_field_val .= $fieldContent;
+		}
+		else
+		{
+		$search_doc->addField(Zend_Search_Lucene_Field::Text($attributes['name'], $fieldContent, 'utf-8'));
+		}
+		}
+
+		if($attributes['setTo'])
+		{
+		$pattern1 = '/[^a-zA-Z0-9 ]/';
+		$pattern2 = '/ .{1,2} /';
+		$replacement = '';
+		$replacement2 = ' ';
+		$common_field_val = preg_replace($pattern1, $replacement, $common_field_val);
+		$common_field_val = preg_replace($pattern2, $replacement2, $common_field_val);
+		$search_doc->addField(Zend_Search_Lucene_Field::Text($attributes['setTo'], $common_field_val, 'utf-8'));
+		}
+
+		$search_index->addDocument($search_doc);
+		}
+		}
+		}
+
+		$search_index->commit();
+		}
+		catch (Exception $e)
+		{
+		FileHelper::Log("INDEXING -> Error wile adding document ".$id." | ".$e->getMessage(), UtilsHelper::MSG_ERROR );
+		}*/
+	}
+
+	// ============================================================ Other functions ============================================================
+
+	public static function getParentsTree($id)
+	{
+		$tree[] = self::getDocumentInstance($id);
+		$parent = self::getParentOf($id);
+
+		while ($parent)
+		{
+			$tree[] = $parent;
+			$parent = self::getParentOf($parent->getId());
+		}
+
+		return array_reverse($tree);
+	}
+
+}

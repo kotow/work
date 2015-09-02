@@ -1,0 +1,14 @@
+set:
+#  magic_quotes_runtime:        on
+  log_errors:                  off
+  arg_separator.output:        |
+    &amp;
+
+check:
+#  zend.ze1_compatibility_mode: off
+
+warn:
+#  magic_quotes_gpc:            off
+#  register_globals:            off
+ # session.auto_start:          off
+

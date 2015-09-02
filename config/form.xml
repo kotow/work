@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+<!-- CORE MODELS -->
+	<object name="Folder" module="admin" >
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+	</object>
+
+	<object name="Tag" module="admin">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+		<column name="tag_id" type="varchar" size="255" required="true" label="Tag ID" />
+		<column name="module" type="varchar" size="255" required="true" />
+		<column name="document_model" type="varchar" size="255" required="true" label="Document Model"/>
+		<column name="exclusive" type="boolean" />
+	</object>
+<!-- GENERIC MODELS -->
+	<object name="Website" module="website" >
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+		<column name="url" type="varchar" size="255" validate="url" />
+	</object>
+
+	<object name="Menu" module="website" >
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+	</object>
+
+	<object name="Topic" module="website" >
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+		<column name="navigation_title" type="varchar" size="255" label="Navigation title" />
+	</object>
+
+	<!--object name="TopicI18n" module="website" >
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+		<column name="navigation_title" type="varchar" size="255" label="Navigation title" />
+		<column name="culture" type="list" list-id="culture" required="true" unique="true" />
+	</object-->
+
+	<object name="Page" module="website" >
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" label="Title" />
+		<column name="page_type" type="list" list-id="page_types" required="true" label="Page type" />
+		<column name="navigation_title" type="varchar" size="255" required="true" label="Heading" />
+		<column name="rewrite_url" type="varchar" size="255" label="Url Rewrite" />
+		<column name="meta_description" type="varchar" size="255" label="Meta description" />
+		<column name="meta_keywords" type="varchar" size="255" label="Meta keywords" />
+		<column name="image" type="image" allowed="images" />
+		<column name="template" type="list" />
+		<column name="description" type="textarea" richtext="true" size="50" rows="10" label="Description" />
+		<column name="content" type="textarea" richtext="true" size="50" rows="10" label="Content" />
+		<column name="is_secure" type="boolean" label="Is secure" />
+		<column name="-" type="gallery" />
+	</object>
+
+	<!--object name="PageI18n" module="website" >
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+		<column name="rewrite_url" type="varchar" size="255" label="Url Rewrite" />
+		<column name="page_type" type="list" list-id="page_types" required="true" label="Page type"/>
+		<column name="navigation_title" type="varchar" size="255" required="true" label="Heading" />
+		<column name="template" type="list" />
+		<column name="is_secure" type="boolean" label="Is secure" />
+		<<column name="culture" type="list" list-id="culture" required="true" unique="true" />>
+		<column name="-" type="gallery" />
+	</object-->
+
+  	<object name="Lists" module="lists" >
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+		<column name="list_id" type="varchar" size="255" required="true" label="List ID" />
+		<column name="list_type" type="list" list-id="list_types" required="true" label="List type" />
+	</object>
+
+	<object name="Listitem" module="lists" >
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+		<column name="value" type="varchar" size="255" />
+	</object>
+
+	<!--object name="ListitemI18n" module="lists" >
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+		<column name="value" type="varchar" size="255" />
+		<column name="culture" type="list" list-id="culture" required="true" unique="true" />
+	</object-->
+
+	<object name="Media" module="media" >
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" label="Label" />
+		<column name="description" type="varchar" size="255" label="Description" />
+		<column name="filename" type="file" thumbs="height=100" />
+		<column name="filedirpath" type="varchar" size="255" hidden="true" />
+		<column name="filetype" type="varchar" size="255" hidden="true" />
+	</object>
+
+	<object name="News" module="news" >
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" label="Title" />
+		<column name="image" type="image" allowed="images" label="Image" />
+		<column name="start_date" type="timestamp" label="Start date" />
+		<column name="end_date" type="timestamp" label="End date" />
+		<column name="short_description" type="varchar" size="255" label="Short description" />
+		<column name="content" type="textarea" richtext="true" size="50" rows="10" label="Content" />
+		<column name="keywords" type="varchar" size="255" />
+		<column name="-" type="gallery" />
+	</object>
+
+	<!--object name="NewsI18n" module="news" >
+		<tab name="General">
+			<column name="id" type="integer" hidden="true" />
+			<column name="label" type="varchar" size="255" required="true" />
+			<column name="short_description" type="varchar" size="255" label="Short description"/>
+			<column name="image" type="image" allowed="images" />
+			<column name="start_date" type="timestamp" label="Start date" />
+			<column name="end_date" type="timestamp" label="End date" />
+			<column name="culture" type="list" list-id="culture" required="true" unique="true" />
+		</tab>
+		<tab name="Content">
+			<column name="content" type="textarea" richtext="true" size="50" rows="10" />
+		</tab>
+		<column name="-" type="gallery" />
+	</object-->
+
+	<object name="Keyword" module="keywords" >
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+	</object>
+
+	<object name="Newsletter" module="newsletter">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+		<column name="content" type="textarea" richtext="true" size="50" rows="20" />
+	</object>
+
+	<object name="Mailinglist" module="newsletter">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" />
+	</object>
+
+	<object name="Subscriber" module="newsletter">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" />
+		<column name="email" type="varchar" size="255" />
+		<column name="code" type="varchar" size="255" />
+	</object>
+
+	<object name="User" module="user">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" hidden="true" />
+		<column name="first_name" type="varchar" size="100" required="true" label="First name" />
+		<column name="last_name" type="varchar" size="100" label="Last name" />
+		<column name="email" type="varchar" size="100"  />
+		<column name="login" type="varchar" size="50" unique="true" />
+		<column name="password" type="varchar" size="50"  />
+		<column name="confirmpass" type="varchar" size="50"  compare="password" label="Confirm password" />
+		<column name="backend" type="boolean" />
+		<column name="type" type="list" list-id="usertype"/>
+		<column name="phone" type="varchar" size="20" />
+		<column name="city" type="varchar" size="255" />
+		<column name="zip" type="varchar" size="255" />
+		<column name="state" type="varchar" size="255" />
+		<column name="address" type="varchar" size="255" />
+		<column name="address2" type="varchar" size="255" />
+		<column name="mobile_phone" type="varchar" size="255" />
+		<column name="work_phone" type="varchar" size="255" />
+		<column name="contact_name" type="varchar" size="255" label="Contact name" />
+		<column name="contact_number" type="varchar" size="255" label="Contact number" />
+	</object>
+
+	<object name="Category" module="products">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" Label="Title" />
+		<column name="icon" type="image" allowed="images" Label="Icon" />
+	</object>
+<!--
+	<object name="CategoryI18n" module="products">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+		<column name="culture" type="list" list-id="culture" required="true" unique="true" />
+	</object>
+
+	<object name="ServiceCategory" module="services">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+		<column name="short_description" type="varchar" size="255" />
+		<column name="image" type="image" allowed="images" thumbs="w=600 tw=80" />
+	</object>
+
+	<object name="Service" module="services">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+		<column name="description" type="textarea" size="50" rows="10" />
+	</object>
+-->
+	<object name="Product" module="products">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" label="Title" />
+		<column name="image" type="image" allowed="images" thumbs="w=600 tw=80" label="Image" />
+		<column name="short_description" type="varchar" size="100" label="Short description" />
+		<column name="description" type="textarea" richtext="true" size="50" rows="10" label="Description" />
+		<column name="price" type="integer" label="Price" />
+		<column name="currency" type="list" list-id="currency" required="true" unique="true" label="currency" />
+		<column name="keywords" type="varchar" size="255" />
+		<column name="-" type="gallery" />
+	</object>
+
+	<!--object name="ProductI18n" module="products">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+		<column name="image" type="image" allowed="images" thumbs="w=600 tw=80" />
+		<column name="short_description" type="varchar" size="100" label="Short description"/>
+		<column name="description" type="textarea" richtext="true" size="50" rows="10" />
+		<column name="price" type="integer" />
+		<column name="currency" type="list" list-id="currency" required="true" unique="true" />
+		<column name="-" type="gallery" />
+	</object-->
+
+	<object name="Slider" module="slider">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" label="Title" />
+	</object>
+
+	<object name="Slide" module="slider">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" label="Title" />
+		<column name="image" type="image" allowed="images" label="Image" />
+		<column name="description" type="longvarchar" richtext="true" size="50" rows="10" label="Description" />
+		<column name="link" type="varchar" size="255" label="Link" />
+	</object>
+
+	<!--object name="SlideI18n" module="slider">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" />
+		<column name="image" type="image" allowed="images" />
+		<column name="description" type="longvarchar" richtext="true" size="50" rows="10" />
+		<column name="link" type="varchar" size="255" required="true" />
+		<column name="culture" type="varchar" size="7" />
+	</object-->
+
+	<object name="Gallery" module="galleries">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" label="Title" />
+		<column name="image" type="image" allowed="images" label="Image" />
+		<column name="description" type="longvarchar" richtext="true" size="50" rows="10" label="Description" />
+	</object>
+
+	<object name="Client" module="clients">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" label="Title" />
+	</object>
+
+	<object name="Import" module="trademarks">
+		<column name="id" type="integer" hidden="true" />
+	</object>
+
+	<object name="Trademark" module="trademarks">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" label="Label (Mark)" /> <!-- Trademark -->
+		<column name="application_number" type="varchar" size="255" required="true" label="Application number" />
+		<column name="register_number" type="varchar" size="255" required="true" label="Register number"/>
+		<column name="registration_date" type="varchar" size="12"  label="Registration date" />
+		<column name="from_system" type="integer" label="From system" /> <!-- WIPO - world (3), OAMI - Europe (2), BPO - Bulgaria (1)-->
+		<column name="kind" type="integer" label="Kind" /> <!-- text,image,mixed -->
+		<column name="date_requested" type="varchar" size="12" label="Date requested" />
+		<column name="status" type="integer" label="Status" /> <!-- Pending, Registered, Rejected, Deleted? -->
+		<column name="expires_on" type="varchar" size="12" label="Expires on" />
+		<column name="publications" type="textarea" size="50" rows="10" label="Publications" /> <!-- seriazlized array - table format -->
+		<column name="vienna_classes" type="varchar" size="512" label="VIENNA classes" />
+		<column name="nice_classes" type="varchar" size="512" label="NICE classes" />
+		<column name="rights_owner" type="textarea" size="50" rows="10" label="Rights owner" />
+		<column name="rights_representative" type="textarea" size="50" rows="10" label="Rights representative" />
+		<column name="office_of_origin" type="varchar" size="10" label="Office of origin" /> <!-- country code: BG, EN, UK, etc... only one! -->
+		<column name="designated_contracting_party" type="varchar" size="512" label="Designated contracting party" /> <!-- country code: BG, EN, UK, GR, RO, etc... many! -->
+		<column name="image" type="image" allowed="images" />
+	</object>
+
+	<object name="Brand" module="search">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" required="true" label="Label (Mark)" />
+	</object>
+
+	<object name="Search" module="search">
+		<column name="id" type="integer" hidden="true" />
+		<column name="label" type="varchar" size="255" label="Label (Mark)" /> <!-- Trademark -->
+		<column name="application_number" type="varchar" size="255" label="Application number" />
+		<column name="register_number" type="varchar" size="255" label="Register number"/>
+		<column name="registration_date" type="varchar" size="12" label="Registration date" />
+		<column name="date_requested" type="varchar" size="12" label="Date requested" />
+		<column name="expires_on" type="varchar" size="12" label="Expires on" />
+		<column name="vienna_classes" type="varchar" size="512" label="VIENNA classes" />
+		<column name="nice_classes" type="varchar" size="512" label="NICE classes" />
+		<column name="rights_owner" type="textarea" size="50" rows="10"  label="Rights owner" />
+		<column name="rights_representative" type="textarea" size="50" rows="10"  label="Rights representative" />
+		<column name="office_of_origin" type="varchar" size="10" label="Office of origin" /> <!-- country code: BG, EN, UK, etc... only one! -->
+		<column name="designated_contracting_party" type="varchar" size="512" label="Designated contracting party" /> <!-- country code: BG, EN, UK, GR, Ro, etc... many! -->
+	</object>
+
+</form>

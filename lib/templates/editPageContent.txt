@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+	<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+	<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+	<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+	<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+	<head>
+		<?php include_http_metas() ?>
+		<?php include_metas() ?>
+		<?php include_title() ?>
+<?php
+	$subscriber = $sf_user->getSubscriber(); 
+	$isAdmin = ($subscriber && $subscriber->getType() == "admin");
+?>
+<?php 
+	$parentPage = Document::getParentOf($sf_params->get('pageref'));
+	if($parentPage) $isHome = Document::hasTag($parentPage, "website_page_home");
+?>
+	
+	    <!-- Basic Page Needs
+	    ================================================== -->
+	    <meta charset="utf-8">
+	
+	    <!-- Mobile Specific Metas
+	    ================================================== -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	    <!-- CSS
+	    ================================================== -->
+	    <link rel="stylesheet" href="/css/base.css">
+	    <link rel="stylesheet" href="/css/skeleton.css">
+	    <link rel="stylesheet" href="/css/layout.css">
+	    <link rel="stylesheet" href="/js/fancybox/jquery.fancybox.css">
+	    <!-- slider css -->
+    	<link rel="stylesheet" href="/js/royalslider/royalslider.css">
+    	<link rel="stylesheet" href="/js/royalslider/minimal-white/rs-minimal-white.css">
+  		<link rel="stylesheet" href="/css/home.slider.css">
+	    <!--[if gte IE 9]>
+	        <link rel="stylesheet" href="/css/IE9.css">
+	    <![endif]-->
+	    <!--[if IE 8]>
+	        <link rel="stylesheet" href="/css/IE8.css">
+	    <![endif]-->
+	    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+	
+	    <!-- Favicons
+	    ================================================== -->
+	    <link rel="shortcut icon" href="images/favicon.ico">
+	    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+	    <!--[if lt IE 9]>
+	        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+	    <!--[if lt IE 8]>
+	        <div style='clear: both; text-align:center; position: relative;'>
+	            <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+	                <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today.">
+	            </a>
+	        </div>
+	    <![endif]-->
+	</head>
+	<body>
+		<div class="container">
+			<?php echo $sf_data->getRaw('sf_content') ?>
+			<?php 	$context = sfContext::getInstance();
+					$user_session = $context->getUser();
+					if(($flashMsg = $user_session->getAttribute("flashMsg")) && $user_session->getAttribute("flashMsg") != ''):
+			?>
+				<script language="javascript" type="text/javascript">
+					$("#flashMsg").hide();
+					$("#flashMsg").html("<?php if ($flashMsg!=1) echo addslashes($flashMsg); ?>");
+					$("#flashMsg").show('normal');
+				</script>
+			<?php $user_session->setAttribute("flashMsg", null); endif; ?>
+		</div>
+<!-- JS
+    ================================================== -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.js"></script>
+    <script>window.jQuery || document.write("<script src='/js/jquery-1.8.1.min.js'>\x3C/script>")</script>
+    <script src="/js/jquery.mobilemenu.min.js"></script>
+    <!--script src="/js/jquery.mousewheel-3.0.6.pack.js"></script-->
+    <script src="/js/fancybox/jquery.fancybox.pack.js"></script>
+    <script src="/js/script.js"></script>
+    <!--script src="/js/jquery.roundabout.js"></script>
+    <script src="/js/jquery.tmpl.min.js"></script-->
+    <script src="/js/royalslider/jquery.royalslider.min.js"></script>
+    <script>
+        jQuery(document).ready(function($) {
+            $('#slider-with-blocks').royalSlider({
+                arrowsNav: true,
+                arrowsNavAutoHide: false,
+                fadeinLoadedSlide: false,
+                controlNavigationSpacing: 0,
+                controlNavigation: 'bullets',
+                imageScaleMode: 'none',
+                imageAlignCenter:false,
+                blockLoop: true,
+                loop: true,
+                numImagesToPreload: 6,
+                transitionType: 'fade',
+                keyboardNavEnabled: true,
+                block: {
+                    delay: 400
+                }
+            });
+        });
+    </script>
+<!-- End Document
+================================================== -->
+	<div id="blocks_insert" style="display:none;background-color:#222;border:solid 1px #ccc;cursor:move;z-index:10001;padding:10px;border-radius:5px"></div>
+	<?php if($isAdmin):?>
+		<div class="contextMenu" id="freeBlock" style="z-index:10000;">
+			<ul>
+				<li id="insertBlock"><img src="/images/set2/doc_import_icon&16.png"/>Insert block</li>
+				<li id="deleteBlock"><img src="/images/set2/doc_export_icon&16.png"/>Delete block</li>
+			</ul>
+		</div>
+	<?php endif;?>
+		<script language="javascript" type="text/javascript" src="/js/backend/jquery.contextmenu.js"></script>
+		<script language="javascript" type="text/javascript" src="/js/backend/ui.mouse.js"></script>
+		<script language="javascript" type="text/javascript" src="/js/backend/ui.draggable.js"></script>
+		<script language="javascript" type="text/javascript" src="/js/backend/ui.draggableext.js"></script>
+		<!--script language="javascript" type="text/javascript" src="/js/backend/ui.droppable.js"></script>
+		<script language="javascript" type="text/javascript" src="/js/backend/ui.droppableext.js"></script-->
+		<script language="javascript" type="text/javascript" src="/js/backend/editPageContent.js"></script>
+		<script language="javascript" type="text/javascript" src="/js/backend/editPageContentContextMenus.js"></script>
+		<script language="javascript" type="text/javascript" src="/js/tiny_mce/tiny_mce.js"></script>
+
+<!-- JS
+    ================================================== -->
+    <script src="js/jquery.roundabout.js"></script>
+    <script src="js/jquery.tmpl.min.js"></script>
+    <script id="projectTmpl" type="text/x-jquery-tmpl">
+        <div class="four columns ${style}">
+            <div class="portfolio-item">
+                <div class="thumb">
+                    <a href="${url}">
+                        <img src="${thumb1}" alt="">
+                        <img src="${thumb2}" alt="">
+                    </a>
+                </div>
+                <p class="text"><a href="#">${desc}</a></p>
+                <p class="more"><a href="#">read more</a></p>
+            </div>
+        </div>
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#gallery').roundabout({
+                minScale: 0.8,
+                maxScale: 1,
+                duration:400,
+                clickToFocus:true,
+                btnNext: '#prev',
+                btnPrev: '#next',
+                responsive: true
+            });
+            
+            $(window).bind('resize',function(){
+               if ($(window).width() < 768) 
+                    window.location.href = window.location.href;
+            });
+            
+            // load projects
+            $.loadProjects();
+            
+            $('#pageBarLeft').click(function() {
+                $('#projectsList > div').fadeOut(300, function() {
+                    $.loadProjects();
+                });
+                return false;
+            });
+            
+            $('#pageBarRight').click(function() {
+                $('#projectsList > div').fadeOut(300, function() {
+                    $.loadProjects();
+                });
+                return false;
+            });
+        });
+        (function($) {
+            $.loadProjects = function() {
+                $.getJSON('projects.json', function(data) {
+                    $('<div/>').addClass('loader').appendTo('#projectsList');
+                    if (data) {
+                        $('#projectsList').empty();
+                        $('#projectTmpl').tmpl(data.projects).appendTo('#projectsList');
+                    }
+                });
+            };
+        })(jQuery);
+    </script>
+<!-- End Document
+================================================== -->
+	</body>
+</html>

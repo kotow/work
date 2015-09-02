@@ -1,0 +1,95 @@
+Rootfolder:
+  lists:
+    label: Lists
+  tag:
+    label: Tag
+  media:
+    label: Media
+  user:
+    label: User
+  website:
+    label: Website
+  news:
+    label: News
+  keywords:
+    label: Keywords
+  newsletter:
+    label: Newsletter
+  galleries:
+    label: Galleries
+  products:
+    label: Products
+  slider:
+    label: Slider
+
+User:
+  admin:
+    login:      admin
+    first_name: System
+    last_name:  Administrator
+    password:   lionne
+    email:      
+    backend:    1
+    type:       admin
+
+Tag:
+  default_website:
+    label:      Default website
+    tag_id:     website_website_default
+    module:     Website
+    document_model:     Website
+    exclusive:  1
+  home_page:
+    label:      Home page
+    tag_id:     website_page_home
+    module:     Website
+    document_model:     Page
+    exclusive:  1
+  index_page:
+    label:      Index page
+    tag_id:     website_page_index
+    module:     Website
+    document_model:     Page
+    exclusive:  0
+  ivisible_page:
+    label:      Invisible
+    tag_id:     website_page_nonvisible
+    module:     Website
+    document_model:     Page
+    exclusive:  0
+  website_menu_main:
+    label:      Main menu
+    tag_id:     website_menu_main
+    module:     Website
+    document_model:     Menu
+    exclusive:  1
+  website_menu_footer:
+    label:      Footer menu
+    tag_id:     website_menu_footer
+    module:     Website
+    document_model:     Menu
+    exclusive:  1
+  website_page_newslist:
+    label:      News list page
+    tag_id:     website_page_newslist
+    module:     Website
+    document_model:     Page
+    exclusive:  1
+  website_page_newsdetail:
+    label:      News detail page
+    tag_id:     website_page_newsdetail
+    module:     Website
+    document_model:     Page
+    exclusive:  1
+  website_page_404:
+    label:      Error 404 page
+    tag_id:     website_page_404
+    module:     Website
+    document_model:     Page
+    exclusive:  1
+  newsletter_folder_mailinglist:
+    label:      Mailing list folder
+    tag_id:     newsletter_folder_mailinglist
+    module:     Newsletter
+    document_model:     Folder
+    exclusive:  1

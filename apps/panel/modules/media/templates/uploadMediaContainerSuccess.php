@@ -1,0 +1,1 @@
+<iframe src ='/panel/media/uploadMedia/input/<?php echo $sf_params->get("input")?>/allowed/<?php echo $sf_params->get("allowed")?>' width='100%' height='100%' frameborder='0'></iframe>

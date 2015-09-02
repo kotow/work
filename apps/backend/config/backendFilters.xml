@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<backend_filters>
+
+	<module name="newsletter">
+		<filter name="sendNewsletter" pop="200,500">Send newsletter</filter>
+	</module>
+
+</backend_filters>

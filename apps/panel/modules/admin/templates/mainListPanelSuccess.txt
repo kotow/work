@@ -1,0 +1,163 @@
+<?php echo $sf_params->get("backendMsg");?>
+<?php //if($children):?>			
+
+<h1 class="lead-heading"><?php echo /*($module == "website") ? 'Pages' :*/ ucfirst($module); ?></h1>
+<?php if ($paging):?>
+<div>
+	<div class="pages">
+		<?php echo $paging; ?>
+	</div>
+</div>
+<?php endif; ?>
+<div class="clear"></div>
+<form>
+	<input type="hidden" name="deletedObjects" id="deletedObjects" value="" />
+	<fieldset class="drop-shadow">
+		<div class="buttons">
+			<!--<a href="add_new_text_page.html" class="submit">Add New</a>-->
+<?php
+//	var_dump($rights);
+	foreach ($rights as $r)
+	{
+		if ( ($r != '') && (substr($r, 0, 1) != '-') )
+		{
+			$add = ($parent = $sf_params->get('p')) ? '&parent='.$parent : '';
+			$r = str_replace('create', '', $r);
+			echo '<a href="?m='.$sf_params->get('m').'&n='.$r.$add.'" class="submit">Add '.$r.'</a>';
+		}
+	}
+?>
+<?php if ( !in_array('-delete', $rights) ): ?>
+				<ul class="actions">
+					<li><a href="javascript:void(0);" title="#" class="SelectAll">Select All</a></li>
+					<li><a href="javascript:void(0);" title="#" class="DeselectAll">Deselect All</a></li>
+					<li><a href="javascript:void(0);" title="#" class="delete-all">Delete Selected</a></li>
+				</ul>
+				<div class="clear"></div>
+<?php endif; ?>	
+		</div>
+
+		<div class="table-list">
+			<div class="row lead">
+				<div class="col-a"><strong>Name</strong></div>
+				<div class="col-f"><strong>Del</strong></div>
+				<div class="col-f"><strong>Move</strong></div>
+				<div class="col-f"><strong>Edit</strong></div>
+				<div class="col-f"><strong>Status</strong></div>
+				<div class="clear"></div>
+			</div>
+<?php if ( !in_array('-order', $rights) ): ?>
+			<ul id="sortable" class="mainList">
+<?php else: ?>
+			<ul class="mainList">
+<?php endif; ?>
+
+<?php if ($children): ?>
+
+	<?php foreach ($children as $item):
+		$id = $item->getId();
+		if ($itemI18n = Document::getDocumentByCulture($item, null, true))
+		{
+			$label = $itemI18n->getLabel();
+		}
+		else
+		{
+			$label = $item->getLabel();
+		}
+		
+		$class = get_class($item);
+		$gen = Document::getGenericDocument($id);
+//var_dump($user_rights[$module][$class]);
+		// check if object has childrens (from RIGHTS)
+		if ($module_rights[$class] > '')
+			$href = 'href="?m='.$sf_params->get('m').'&p='.$id.'"';
+		else
+			$href = '"href="javascript:void(0)"';
+	?>
+				<li class="ui-state-default" id="<?php echo $class.'_'.$id; ?>">
+					<div class="row">
+						<div class="col-aa"><input type="checkbox" name="check"></div>
+						<div class="col-aa" ><img src="/images/icons/<?php echo strtolower($class); ?>.png" align="top"></div>
+						<div class="col-a">
+							<a <?php echo $href; ?>><?php echo UtilsHelper::cutStr($label, 80, '...'); ?></a>
+						</div>
+						<div class="col-f">
+<?php if ($user_rights[$module][$class]['delete']): ?>
+							<a href="javascript:void(0);" title="Delete" class="del"></a>
+<?php else: ?>
+							<a href="javascript:void(0);" onclick="return noDelete();" title="Delete" class="nodel"></a>
+<?php endif; ?>
+						</div>
+						<div class="col-f">
+<?php if ($user_rights[$module][$class]['order']): ?>
+							<a href="javascript:void(0);" title="Move up" class="moveup"></a>
+							<a href="javascript:void(0);" title="Move down" class="movedown"></a>
+<?php else: ?>
+							&nbsp;
+<?php endif; ?>
+						</div>
+						<div class="col-f">
+<?php if ($user_rights[$module][$class]['edit']): ?>
+							<a href="?m=<?php echo $sf_params->get('m'); ?>&id=<?php echo $id; ?>" title="Edit" class="edit"></a>
+<?php else: ?>
+							<a href="javascript:void(0);" onclick="return noEdit();" title="Edit" class="edit"></a>
+<?php endif; ?>
+						</div>
+						<div class="col-f"><a href="javascript:void(0);" title="Status" class="status <?php if ($gen->getPublicationStatus() != UtilsHelper::STATUS_ACTIVE) echo 'offline'; ?>"></a></div>
+						<div class="clear"></div>
+					</div>
+				</li>
+	<?php endforeach; ?>
+<?php endif; ?>
+
+			</ul>
+			<div id="delete-all" title="Delete All Items">
+				<p>
+					<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+					These items (and all sub-items) will be permanently deleted and cannot be recovered. Are you sure?
+					<center style="height: 20px;"><img id="del_all_wait" style="display: none;" title="Working..." src="/images/load.gif"></center>
+				</p>
+			</div>
+			<div id="delete-this" title="Delete Item">
+				<p>
+					<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+					This item (and all sub-items) will be permanently deleted and cannot be recovered. Are you sure?
+					<center style="height: 20px;"><img id="del_wait" style="display: none;" title="Working..." src="/images/load.gif"></center>
+				</p>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="buttons">
+			<!--<a href="add_new_text_page.html" class="submit">Add New</a>-->
+<?php
+//	var_dump($rights);
+	foreach ($rights as $r)
+	{
+		if ( ($r != '') && (substr($r, 0, 1) != '-') )
+		{
+			$add = ($parent = $sf_params->get('p')) ? '&parent='.$parent : '';
+			$r = str_replace('create', '', $r);
+			echo '<a href="?m='.$sf_params->get('m').'&n='.$r.$add.'" class="submit">Add '.$r.'</a>';
+		}
+	}
+?>
+<?php if ( !in_array('-delete', $rights) ): ?>
+			<ul class="actions">
+				<li><a href="javascript:void(0);" title="#" class="SelectAll">Select All</a></li>
+				<li><a href="javascript:void(0);" title="#" class="DeselectAll">Deselect All</a></li>
+				<li><a href="javascript:void(0);" title="#" class="delete-all">Delete Selected</a></li>
+			</ul>
+<?php endif; ?>
+			<div class="clear"></div>
+		</div>
+	</fieldset>
+</form>
+<?php if ($paging):?>
+<div>
+	<div class="pages">
+		<?php echo $paging; ?>
+	</div>
+</div>
+<?php endif; ?>
+<div class="clear"></div>
+<?php //endif; ?>

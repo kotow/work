@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blocks>
+
+	<block label="Tracked trademarks" id="trademarks/tracked" />
+	<block label="Add new Tracked Trademark" id="trademarks/addNewBrand" />
+	<block label="Tracked Trademark details" id="trademarks/details" />
+	
+	<block label="Upload Trademarks" id="trademarks/uploadTrademarks" />
+	<block label="Add new Trademark" id="trademarks/addNewTrademark" />
+
+</blocks>

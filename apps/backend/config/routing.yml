@@ -1,0 +1,28 @@
+# default rules
+
+# admin
+homepage:
+  url:   /
+  param: { module: admin, action: index }
+
+listmodules:
+  url:   /listmodules
+  param: { module: admin, action: listmodules }
+  
+default_symfony:
+  url:   /symfony/:action/*
+  param: { module: default }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*
+  
+# user
+login:
+  url:   /login
+  param: { module: user, action: login }
+  
+

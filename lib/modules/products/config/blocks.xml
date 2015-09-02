@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blocks>
+
+	<!--block label="Home Service Categories" id="products/homeServiceCategories"/-->
+	<block label="Products categories list" id="products/productCategoriesList"/>
+	<block label="Products list" id="products/productsList"/>
+	<block label="Product details" id="products/productDetails"/>
+	<block label="Cart" id="products/cart"/>
+	<block label="Order Page Cart" id="products/cartOrder"/>
+	<block label="Review Order" id="products/order"/>
+	<block label="Process Sale" id="products/processSale"/>
+
+</blocks>

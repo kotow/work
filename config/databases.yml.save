@@ -1,0 +1,19 @@
+all:
+  propel:
+    class:      sfPropelDatabase
+    param:
+      phptype:  mysql
+      host:     127.0.0.1
+      database: five05438_kids
+      username: five05438
+      password: 'dalibg97'
+      encoding: utf8
+  five05438_kids:
+    class:      sfPropelDatabase
+    param:
+      phptype:  mysql
+      host:     127.0.0.1
+      database: five05438_kids
+      username: five05438
+      password: 'dalibg97'
+      encoding: utf8

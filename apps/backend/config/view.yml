@@ -1,0 +1,17 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        :: Content Management System ::
+    robots:       index, follow
+    description:  CMS
+    keywords:     cms
+    language:     en
+
+  stylesheets:    [backoffice]
+
+  javascripts:    []
+
+  has_layout:     off
+  layout:         backend

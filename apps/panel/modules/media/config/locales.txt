@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locales>
+	
+	<locale label="UPLOAD_ERR_INI_SIZE">
+		<item lang="en" value="file exceeds size limit" />
+	</locale>
+	
+	<locale label="UPLOAD_ERR_FORM_SIZE">
+		<item lang="en" value="file exceeds size limit" />
+	</locale>
+	
+	<locale label="UPLOAD_ERR_PARTIAL">
+		<item lang="en" value="UPLOAD_ERR_PARTIAL" />
+	</locale>
+	
+	<locale label="UPLOAD_ERR_NO_FILE">
+		<item lang="en" value="please select a file" />
+	</locale>
+
+	<locale label="UPLOAD_ERR_NO_TMP_DIR">
+		<item lang="en" value="UPLOAD_ERR_NO_TMP_DIR" />
+	</locale>
+
+	<locale label="UPLOAD_ERR_CANT_WRITE">
+		<item lang="en" value="UPLOAD_ERR_CANT_WRITE" />
+	</locale>
+
+	<locale label="UPLOAD_ERR_WRONG_FILE_TYPE">
+		<item lang="en" value="Wrong file type" />
+	</locale>
+
+</locales>

@@ -1,0 +1,15 @@
+# default rules
+homepage:
+  url:   /
+  param: { module: website, action: display }
+
+url_rewrite:
+  url:   /:rewriteUrl
+  param: { module: website, action: display }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

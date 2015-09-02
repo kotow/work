@@ -1,0 +1,95 @@
+fieldset
+{
+	padding:4px 0 0 9px;
+}
+#selectDocuments
+{
+	float:left;
+	width:300px;
+}
+
+#selectDocuments ul li:hover
+{
+	cursor:pointer;
+}
+
+#frmbody
+{
+	padding: 10px;
+	background-color: #FFF;
+	border: 1px solid #CCC;
+	overflow:auto;
+}
+
+.frmRow
+{
+	margin-bottom: 10px;
+}
+
+#templatesrc
+{
+	border: none;
+	/*width: 392px;
+	height: 450px;*/
+}
+
+.title
+{
+	padding-bottom: 5px;
+}
+
+.mceActionPanel
+{
+	padding-top: 5px;
+}
+
+.treeview ul
+{
+	background-color: white;
+}
+
+.treeview, .treeview ul
+{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.treeview, .treeview ul li a
+{
+	margin-left: 6px;
+}
+
+.treeview div.hitarea
+{
+	height: 15px;
+	width: 15px;
+	margin-left: -15px;
+	float: left;
+	cursor: pointer;
+}
+
+/* fix for IE6 */
+* html div.hitarea {
+	background: #fff;
+	filter: alpha(opacity=0);
+	display: inline;
+	float:none;
+}
+
+.treeview li {
+	margin: 0;
+	padding: 3px 5px 2px 20px
+}
+
+#treecontrol { margin: 1em 0; }
+
+.treeview .hover { color: red; cursor: pointer; }
+
+.treeview li { background: url(/images/icons/tv-item.gif) 0 0 no-repeat; }
+.treeview .collapsable { background-image: url(/images/icons/tv-collapsable.gif); }
+.treeview .expandable { background-image: url(/images/icons/tv-expandable.gif); }
+.treeview .last { background-image: url(/images/icons/tv-item-last.gif); }
+.treeview .first { background-image: url(/images/icons/tv-item-first.gif); }
+.treeview .lastCollapsable { background-image: url(/images/icons/tv-collapsable-last.gif); }
+.treeview .lastExpandable { background-image: url(/images/icons/tv-expandable-last.gif); }

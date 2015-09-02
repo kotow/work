@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blocks>
+	<block label="Richtext" id="richtext" />
+	<block label="Main navigation" id="website/mainNav" />
+	<!--block label="Topic menu" id="website/topicMenu" />
+	<block label="Featured" id="website/featured" />
+	<block label="Contact form" id="website/contact" />
+	<block label="Quote form" id="website/quote" /-->
+</blocks>

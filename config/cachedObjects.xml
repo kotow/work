@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects>
+
+	<object>Folder</object>
+	<object>Lists</object>
+	<object>Listitem</object>
+	<object>Menu</object>
+	<object>Media</object>
+	<object>News</object>
+	<object>Page</object>
+	<object>Rootfolder</object>
+	<object>Tag</object>
+	<object>Topic</object>
+	<object>Urlrewrite</object>
+	<object>User</object>
+	<object>Website</object>
+
+	<object>Keyword</object>
+	<object>Client</object>
+	<object>Brand</object>
+	<object>Trademark</object>
+	<object>Search</object>
+
+</objects>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blocks>
+
+	<block label="Search Templates" id="search/searchTemplates" />
+	<block label="Add Search Template" id="search/addSearchTemplate" />
+	<block label="Web Search" id="search/webSearch" />
+	<block label="Web Search - Results" id="search/searchResults" />
+	<!--block label="Search Reports" id="search/searchReports" /-->
+
+	<block label="Import Sessions" id="search/importSessions" />
+	<block label="Import Session Reports" id="search/importSessionReports" />
+
+	<block label="Trademark details" id="search/trademarkDetails" />
+
+	<block label="Search" id="search/search" />
+	<block label="Search Form" id="search/searchForm" />
+	<block label="SearchMatch detail" id="search/details" />
+
+</blocks>

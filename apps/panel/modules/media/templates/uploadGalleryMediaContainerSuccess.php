@@ -1,0 +1,1 @@
+<iframe src ='/panel/media/uploadGalleryMedia/parentMediaId/<?php echo $sf_params->get("parentMediaId")."/galleryType/".$sf_params->get("galleryType", 1)."/".$paramsStr; ?>' width='100%' height='100%' frameborder='0'></iframe>

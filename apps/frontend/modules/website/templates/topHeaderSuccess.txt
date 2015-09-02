@@ -1,0 +1,17 @@
+<h1 class="top-left">
+	<?php echo UtilsHelper::Localize("website.frontend.Header_text"); ?>
+</h1>
+<?php
+	/*echo MenuHelper::get_menu_by_tag("website_menu_top",
+		array(
+			'depth' => 1,
+			'mainMasterClass' => 'top-right',
+			'lastItemClass' => 'm-left'
+		)
+	);*/
+?>
+
+<ul class="top-right">
+	<li class="m-right"><span class="white">HOT LINE</span>: 202 677 2022</li>
+</ul>
+<div class="clear"></div>

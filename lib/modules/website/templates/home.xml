@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template id="home">
+	<layout>
+		<header id="header" />
+		<div id="wrapper">
+			<div class="qfContainer">
+				<div class="qfContainerBlock qfMainNav" id="main-nav" />
+				<div class="qfContainerBlock qfMainBody" id="main-section" />
+			</div>
+		</div>
+	</layout>
+	<targets>
+		<destination id="header" type="website/header" />
+		<destination id="main-nav" type="website/mainNav" />
+		<destination id="main-section" type="free" />
+	</targets>
+</template>

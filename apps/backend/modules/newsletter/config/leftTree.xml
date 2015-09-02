@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects>
+	<object commands="createNewsletter,createFolder">Rootfolder</object>
+	<object commands="createMailinglist">Folder</object>
+	<object commands="createSubscriber">Mailinglist</object>
+</objects>

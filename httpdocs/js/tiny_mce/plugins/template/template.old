@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#template_dlg.title}</title>
+	
+	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="js/template.js"></script>
+	<script type="text/javascript" src="/js/backend/jquery.js"></script>
+	<script type="text/javascript" src="/js/backend/jquery.contextmenu.js"></script>
+	<script type="text/javascript" src="/js/backend/jquery.treeview.js"></script>
+
+		
+	<link href="css/template.css" rel="stylesheet" type="text/css" />
+
+
+	<base target="_self" />
+</head>
+<body onresize="TemplateDialog.resize();">
+
+	<form onsubmit="TemplateDialog.insert();return false;">
+		<div id="frmbody">
+		
+			<div class="title">{#template_dlg.desc}</div>
+		
+			<div id="selectDocuments">
+				<ul id="documentNavigation" class="treeview" >
+					<li>&nbsp;</li>
+				</ul>
+			</div>
+			
+			<fieldset>
+				<legend>{#template_dlg.preview}</legend>
+				<iframe id="templatesrc" name="templatesrc" src="blank.htm" frameborder="0"></iframe>
+			</fieldset>
+			<div class="mceActionPanel">
+				<div style="float: left">
+					<input type="button" id="insert" name="insert" value="{#insert}" onclick="TemplateDialog.insert();" />
+				</div>
+	
+				<div style="float: right">
+					<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+				</div>
+	
+				<br style="clear:both" />
+			</div>
+			</div>
+			
+		</div>
+		
+		
+	</form>
+
+</body> 
+</html>
+<script type="text/javascript">
+	getMediaTree();
+</script>

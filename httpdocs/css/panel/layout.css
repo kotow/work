@@ -1,0 +1,737 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+#wrapper {
+	width:960px;
+	padding:10px;
+	margin:0 auto;
+}
+.clear {
+	clear:both;
+	display:block;
+	overflow:hidden;
+	visibility:hidden;
+	width:0;
+	height:0
+}
+.clearfix:after {
+	clear:both;
+	content:' ';
+	display:block;
+	font-size:0;
+	line-height:0;
+	visibility:hidden;
+	width:0;
+	height:0
+}
+* html .clearfix, *:first-child+html .clearfix {
+	zoom:1
+}
+.clr {
+	clear:both;
+	font-size:1px;
+	height:1px;
+	line-height:1px;
+	visibility:hidden;
+}
+#header-con {
+}
+#nav-con {
+}
+#content-con {
+}
+#footer-con {
+}
+#subnav-con {
+}
+#header, #nav, #content, #footer, #sub-nav {
+	width:1020px;
+	margin:0 auto;
+	padding:10px;
+}
+#header {
+	padding:10px 0;
+}
+#header #logo {
+	float:left;
+	width:200px;
+}
+#header #logo h1 {
+	margin:0;
+	padding:0;
+}
+#header #header-nav {
+	float:right;
+}
+#header-nav {
+	float:right;
+}
+#header-nav li {
+	float:left;
+	list-style:none;
+	margin:5px;
+	padding:5px;
+}
+#main-nav {
+	padding:5px 0;
+}
+#main-nav li {
+	float:left;
+	margin:0 5px 0 0;
+	padding:0 5px 0 0;
+}
+#main-nav li a {
+	padding:5px 10px;
+	-moz-border-radius:6px;
+	border-radius:6px;
+}
+#sub-nav {
+}
+#sub-nav li {
+	float:left;
+	margin:1px 5px 1px 0;
+	padding:1px 5px 1px 0;
+}
+#sub-nav li a {
+	padding:4px 10px;
+	-moz-border-radius:6px;
+	border-radius:6px;
+}
+.padding {
+	padding:10px;
+}
+.grid_1, .grid_2, .grid_3, .grid_4, .grid_5, .grid_6, .grid_7, .grid_8, .grid_9, .grid_10, .grid_11, .grid_12, .grid_13, .grid_14, .grid_15, .grid_16, .grid_17, .grid_18, .grid_19, .grid_20, .grid_21, .grid_22, .grid_23, .grid_24 {
+	display:inline;
+	float:left;
+	margin-left:5px;
+	margin-right:5px
+}
+.grid_1 {
+	width:30px
+}
+.grid_2 {
+	width:70px
+}
+.grid_3 {
+	width:110px
+}
+.grid_4 {
+	width:150px
+}
+.grid_5 {
+	width:190px
+}
+.grid_6 {
+	width:230px
+}
+.grid_7 {
+	width:270px
+}
+.grid_8 {
+	width:310px
+}
+.grid_9 {
+	width:350px
+}
+.grid_10 {
+	width:390px
+}
+.grid_11 {
+	width:430px
+}
+.grid_12 {
+	width:470px
+}
+.grid_13 {
+	width:510px
+}
+.grid_14 {
+	width:550px
+}
+.grid_15 {
+	width:590px
+}
+.grid_16 {
+	width:630px
+}
+.grid_17 {
+	width:670px
+}
+.grid_18 {
+	width:710px
+}
+.grid_19 {
+	width:750px
+}
+.grid_20 {
+	width:790px
+}
+.grid_21 {
+	width:830px
+}
+.grid_22 {
+	width:870px
+}
+.grid_23 {
+	width:910px
+}
+.grid_24 {
+	width:950px
+}
+.box {
+	padding:5px;
+	margin:0 0 20px 0;
+}
+.lead-heading {
+	margin:0 0 10px 0;
+	padding:5px;
+}
+#boardbox {
+	margin:5px 0;
+}
+h3.lead-heading {
+	padding:5px 10px;
+	margin:0;
+}
+.outside-heading {
+	margin:0 0 10px 0;
+}
+.grid_18 p {
+	padding-right:1em;
+}
+.tab {
+	float:left;
+	margin:5px;
+	width:140px;
+	padding:10px 10px 10px 80px;
+}
+.content {
+	padding:5px 10px;
+}
+/*
+	Accordion
+*/
+
+.ui-accordion {
+	width: 100%;
+}
+.ui-accordion .ui-accordion-header {
+	cursor: pointer;
+	position: relative;
+	margin-top: 1px;
+	zoom: 1;
+}
+.ui-accordion .ui-accordion-li-fix {
+	display: inline;
+}
+.ui-accordion .ui-accordion-header-active {
+	border-bottom: 0 !important;
+}
+.ui-accordion .ui-accordion-header a {
+	display: block;
+	padding: .5em .5em .5em .7em;
+}
+.ui-accordion-icons .ui-accordion-header a {
+	padding-left: 2.2em;
+}
+.ui-accordion .ui-accordion-header .ui-icon {
+	position: absolute;
+	left: .5em;
+	top: 50%;
+	margin-top: -8px;
+}
+.ui-accordion .ui-accordion-content {
+	padding: 1em;
+	border-top: 0;
+	margin-top: -2px;
+	position: relative;
+	top: 1px;
+	margin-bottom: 2px;
+	overflow: auto;
+	display: none;
+	zoom: 1;
+}
+.ui-accordion .ui-accordion-content p {
+	margin:0;
+	padding:0;
+}
+.ui-accordion .ui-accordion-content-active {
+	display: block;
+}
+/*
+	Tabs
+*/
+
+.ui-tabs {
+	position: relative;
+	padding: .2em;
+	zoom: 1;
+} /* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+.ui-tabs .ui-tabs-nav {
+	margin: 0;
+	padding: .2em .2em 0;
+}
+.ui-tabs .ui-tabs-nav li {
+	list-style: none;
+	float: left;
+	position: relative;
+	top: 1px;
+	margin: 0 .2em 1px 0;
+	border-bottom: 0 !important;
+	padding: 0;
+	white-space: nowrap;
+}
+.ui-tabs .ui-tabs-nav li a {
+	float: left;
+	padding: .5em 1em;
+	text-decoration: none;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
+	margin-bottom: 0;
+	padding-bottom: 1px;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a {
+	cursor: text;
+}
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a {
+	cursor: pointer;
+} /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs .ui-tabs-panel {
+	display: block;
+	border-width: 0;
+	padding: 1em 1.4em;
+	background: none;
+}
+.ui-tabs .ui-tabs-hide {
+	display: none !important;
+}
+/*
+	Slider
+*/
+
+
+.slide-controls-one ul {
+	margin:0;
+	padding:0;
+}
+.slide-controls-one ul li {
+	height:200px;
+	background:#ccc;
+	margin:0;
+	padding:0;
+	width:100%;
+}
+.slide-capt {
+	position:absolute;
+	top:20px;
+	left:0;
+	width:200px;
+	height:50px;
+	background:#666;
+	opacity: .3;
+	filter:Alpha(Opacity=30)/*{opacityOverlay}*/;
+}
+.slide-content {
+	width:100%;
+}
+/*next button*/
+.slide-controls-one .bx-next {
+	position:absolute;
+	top:35%;
+	right:-35px;
+	z-index:999;
+	width: 30px;
+	height: 30px;
+	text-indent: -999999px;
+	background: url(/images/panel/gray_next.png) no-repeat 0 -30px;
+}
+/*previous button*/
+.slide-controls-one .bx-prev {
+	position:absolute;
+	top:35%;
+	left:-35px;
+	z-index:999;
+	width: 30px;
+	height: 30px;
+	text-indent: -999999px;
+	background: url(/images/panel/gray_prev.png) no-repeat 0 -30px;
+}
+/*pager links*/
+.slide-controls-one .bx-pager a {
+	margin-right: 5px;
+	padding: 3px 8px 3px 6px;
+	zoom:1;
+	background: url(../imgg/ray_pager.png) no-repeat 0 -20px;
+}
+/*auto start button*/
+.slide-controls-one .bx-auto .start {
+	background: url(../imgg/ray_auto.png) no-repeat 0 2px;
+	padding-left: 13px;
+}
+/*auto stop button*/
+.slide-controls-one .bx-auto .stop {
+	background: url(/images/panel/gray_auto.png) no-repeat 0 -14px;
+	padding-left: 13px;
+}
+/*
+ * End color scheme styles
+ */
+
+
+/*next/prev button hover state*/
+.slide-controls-one .bx-next:hover, .slide-controls-one .bx-prev:hover {
+	background-position: 0 0;
+}
+/*pager links hover and active states*/
+.slide-controls-one .bx-pager .pager-active, .slide-controls-one .bx-pager a:hover {
+	background-position: 0 0;
+}
+/*pager wrapper*/
+.slide-controls-one .bx-pager {
+	text-align:center;
+	padding-top: 7px;
+}
+/*captions*/
+.slide-controls-one .bx-captions {
+	text-align:center;
+	padding: 7px 0;
+}
+/*auto controls*/
+.slide-controls-one .bx-auto {
+	text-align: center;
+	padding-top: 15px;
+}
+.slide-controls-one .bx-auto a {
+}
+ul#icons {
+	margin: 0;
+	padding: 0;
+}
+ul#icons li {
+	margin: 2px;
+	position: relative;
+	padding: 4px 0;
+	cursor: pointer;
+	float: left;
+	list-style: none;
+}
+ul#icons span.ui-icon {
+	float: left;
+	margin: 0 4px;
+}
+.button {
+	margin: 2px;
+	position: relative;
+	padding: 4px 8px 4px 0;
+	cursor: pointer;
+	list-style: none;
+	display:inline-block;
+	text-decoration:none;
+	line-height:16px;
+}
+.button span.ui-icon {
+	float: left;
+	margin: 0 4px;
+}
+.ui-icon:hover {
+}
+/*
+@group Forms
+-----------------------
+   	   Forms
+-----------------------
+*/
+fieldset {
+	padding:10px 20px;
+	margin:10px 0;
+}
+fieldset legend {
+	background:#000;
+	color:#fff;
+	padding:8px 15px;
+	font-weight:bold;
+}
+input, textarea {
+	height: 25px;
+	padding: 0px 5px;
+	line-height: 25px;
+	outline: none;
+	-moz-border-radius:4px;
+	border-radius:4px;
+	vertical-align: middle;
+	font:Arial, Helvetica, sans-serif;
+}
+textarea {
+	height: auto;
+	line-height: 1.5em;
+	padding: 10px 10px 10px 10px;	
+}
+.short {
+	width: 15%;
+}
+.medium {
+	width: 35%;
+}
+.large {
+	width: 70%;
+}
+input.medium {
+	width: 35%;
+}
+input.large {
+	width: 70%;
+}
+input.file {
+	
+	}
+.field {
+	padding:5px 0;
+	display:block;
+}
+.field-right {
+	margin-left:123px;
+	}
+	
+label {
+	display:inline-block;
+	width:120px;
+}
+.buttons {
+	margin:8px 0;
+}
+.buttons a {
+	display:inline-block;
+	margin-right:5px;
+}
+.images-holder {
+	padding:10px 10px 2px 10px;
+	margin:10px 0 0 0;
+	-moz-border-radius:6px;
+	border--radius:6px;
+	min-height:90px;
+}
+
+
+/*
+-----------------------
+   	   Pagination
+-----------------------
+*/
+
+.pages {
+    clear: both;
+    overflow: hidden;
+}
+.paginationControl {
+    border: 1px solid #E9F4FA;
+    border-radius: 3px 3px 3px 3px;
+    clear: both;
+    float: left;
+    overflow: hidden;
+}
+html[dir="rtl"] .paginationControl {
+    float: right;
+}
+.paginationControl > li {
+    float: left;
+    margin: 1px;
+    overflow: hidden;
+}
+html[dir="rtl"] .paginationControl > li {
+    float: right;
+}
+.paginationControl > li > a {
+    border-radius: 3px 3px 3px 3px;
+    display: block;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 0.3em 0.6em;
+}
+.paginationControl > li > a:hover {
+    background-color: #E9F4FA;
+    text-decoration: none;
+}
+.paginationControl > li.disabled > a {
+    color: #999999;
+}
+.paginationControl > li.disabled > a:hover {
+    background-color: transparent;
+    cursor: default;
+}
+.paginationControl > li.selected {
+    background-color: #E9F4FA;
+    border-radius: 3px 3px 3px 3px;
+}
+.paginationControl > li.selected > a {
+    color: #555555;
+}
+.paginator_previous {
+    display: inline;
+    float: left;
+}
+html[dir="rtl"] .paginator_previous {
+    float: right;
+}
+.paginator_next {
+    display: inline;
+    float: right;
+}
+html[dir="rtl"] .paginator_next {
+    float: left;
+}
+
+
+/*
+-----------------------
+   	   Lists
+-----------------------
+*/
+.table-list {
+	margin:10px 0 10px 0;
+}
+.row {
+	padding:10px 0 10px 15px;
+}
+.lead {
+}
+.row .col-a {
+	/* width:400px; */
+	float:left;
+}
+.row .col-aa {
+	width:25px;
+	float:left;
+	text-align:left;
+}
+.row .col-aa input {
+	margin:0 0 0 0;
+	padding:0;
+	height:auto;
+}
+.row .col-b {
+}
+.row .col-c {
+}
+.row .col-d {
+}
+.row .col-e {
+}
+.row .col-f {
+	width:50px;
+	float:right;
+	text-align:center;
+}
+#sortable li a {
+}
+.ui-state-highlight {
+	height:35px;
+}
+
+a.del, a.edit, a.status, a.addsub, a.user-info, a.nodel {
+	width:16px;
+	height:16px;
+	display:block;
+	margin:0 auto;
+}
+a.moveup, a.movedown {
+	width:16px;
+	height:16px;
+	display:block;
+	float: left;
+	margin:0 0 0 5px;
+}
+.arrow {
+	width:14px;
+	height:14px;
+	display:block;
+	float:left;
+	margin-right:6px;
+	}
+ul.actions {
+	float:right;
+}
+ul.actions li {
+	float:left;
+	margin: 2px;
+	padding: 4px 4px 4px 0;
+}
+#images-grid {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+#images-grid li {
+	margin: 0 9px 9px 0;
+	padding:0;
+	float: left;
+	width: 120px;
+	height: 80px;
+	overflow:hidden;
+	cursor:move;
+	font-size: 4em;
+	text-align: center;
+	position:relative;
+}
+.image-highlight {
+	height:80px;
+	}
+.image-options {
+	display:none;
+	position:absolute;
+	top:0;
+	right:0;
+	width:22px;
+	height:22px;
+	}
+.image-options a {
+	float:left;
+	display:block;
+	width:22px;
+	height:22px;}	
+#images-grid li .hover{
+	display:block;
+	background:#000;
+	}	
+
+
+a.support {
+	display:inline-block;
+	margin-right:5px;
+	padding:4px 10px;
+	cursor:pointer;
+	}
+p.text-highlight {
+	padding:3px 5px;
+	margin:0;
+	-moz-border-radius:4px;
+	border--radius:4px;
+	}
+
+.brake {
+	margin:10px 0;
+	padding:0;
+	clear:both;
+	height:0;
+	border:none;
+	border-bottom:1px #fff solid;
+	border-top:1px #ccc solid;
+	}
+
+ul.insert-image {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+ul.insert-image li {
+	margin: 0 9px 9px 0;
+	padding:0;
+	float: left;
+	width: 120px;
+	height: 80px;
+	overflow:hidden;
+	cursor:pointer;
+	font-size: 4em;
+	text-align: center;
+	position:relative;
+}

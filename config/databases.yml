@@ -1,0 +1,19 @@
+all:
+  propel:
+    class:      sfPropelDatabase
+    param:
+      phptype:  mysql
+      host:     127.0.0.1
+      database: tm_marks
+      username: root
+      password: 'root'
+      encoding: utf8
+  tm_marks:
+    class:      sfPropelDatabase
+    param:
+      phptype:  mysql
+      host:     127.0.0.1
+      database: tm_marks
+      username: root
+      password: 'root'
+      encoding: utf8
